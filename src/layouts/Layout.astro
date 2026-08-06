@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+
+const description =
+  'Eva es tu compañía antes de salir. Contale tu plan y, si no respondés a tiempo, Eva avisa a tus contactos seguros con tu ubicación y la información del recorrido.';
 ---
 
 <!doctype html>
@@ -10,8 +13,68 @@ import '../styles/global.css';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="Eva es tu compañera antes de salir. Contale tu plan y, si algo pasa, tus contactos seguros reciben la información que necesitan." />
-		<title>Eva · Tu compañera antes de salir</title>
+		<meta name="description" content={description} />
+		{/* El theme-color se setea dinámicamente desde JS leyendo --background,
+		    así refleja los tokens reales del tema activo (incluyendo cambios
+		    vía el toggle). Ver script anti-FOUC abajo. */}
+		<meta id="theme-color-meta" name="theme-color" content="#FAF7F2" />
+		<meta property="og:description" content={description} />
+		<meta property="og:title" content="Eva · Tu compañera antes de salir" />
+		<meta property="og:type" content="website" />
+		<title>Eva · Tu compañía antes de salir</title>
+
+		{/* Anti-FOUC: aplica el tema antes que el body se renderice, y sincroniza
+		    el <meta name="theme-color"> con el token --background real. Un
+		    MutationObserver sobre data-theme del <html> repinta el chrome del
+		    navegador cuando el usuario togglea el tema. */}
+		<script is:inline>
+			(function () {
+				var themeColorMeta = document.getElementById('theme-color-meta');
+
+				function syncThemeColor() {
+					if (!themeColorMeta) return;
+					var bg = getComputedStyle(document.documentElement)
+						.getPropertyValue('--background')
+						.trim();
+					if (bg) themeColorMeta.setAttribute('content', bg);
+				}
+
+				try {
+					var stored = localStorage.getItem('eva-theme');
+					var theme =
+						stored === 'light' || stored === 'dark'
+							? stored
+							: window.matchMedia('(prefers-color-scheme: dark)').matches
+								? 'dark'
+								: 'light';
+					document.documentElement.setAttribute('data-theme', theme);
+				} catch (_) {
+					document.documentElement.setAttribute('data-theme', 'light');
+				}
+
+				// syncThemeColor necesita CSS ya computado, así que va después del
+				// primer paint. Si los estilos aún no cargaron, getPropertyValue
+				// devuelve '' y no tocamos el meta.
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', syncThemeColor, { once: true });
+				} else {
+					syncThemeColor();
+				}
+
+				// Re-sincroniza cuando el ThemeToggle u otra cosa cambie data-theme.
+				new MutationObserver(syncThemeColor).observe(document.documentElement, {
+					attributes: true,
+					attributeFilter: ['data-theme'],
+				});
+			})();
+		</script>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,30..100&family=Inter:wght@400;500;600&display=swap"
+		/>
 	</head>
 	<body class="antialiased">
 		<slot />

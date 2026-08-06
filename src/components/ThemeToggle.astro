@@ -1,0 +1,102 @@
+---
+/**
+ * ThemeToggle — botón sol/luna para alternar el tema.
+ *
+ * No tiene `data-theme` inicial: el script anti-FOUC del Layout.astro
+ * es quien pinta el estado correcto antes de que este componente se monte.
+ * El botón se hidrata inmediatamente y consulta el estado actual al hacer click.
+ *
+ * Accesibilidad:
+ *   - aria-label dinámico: "Cambiar a modo oscuro" / "Cambiar a modo claro"
+ *   - aria-pressed refleja el estado actual
+ *   - Quirk: aria-pressed en un toggle de tema es debatible, pero ayuda
+ *     a lectores de pantalla a anunciar el estado cuando reciben foco.
+ */
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label="Cambiar tema"
+  aria-pressed="false"
+  class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-background text-foreground transition hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-ring/40"
+>
+  {/* Icono SOL: visible en modo claro (la acción es ir a oscuro). */}
+  <svg
+    class="theme-icon-sun h-4 w-4"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2"></path>
+    <path d="M12 20v2"></path>
+    <path d="m4.93 4.93 1.41 1.41"></path>
+    <path d="m17.66 17.66 1.41 1.41"></path>
+    <path d="M2 12h2"></path>
+    <path d="M20 12h2"></path>
+    <path d="m6.34 17.66-1.41 1.41"></path>
+    <path d="m19.07 4.93-1.41 1.41"></path>
+  </svg>
+
+  {/* Icono LUNA: visible en modo oscuro (la acción es ir a claro). */}
+  <svg
+    class="theme-icon-moon h-4 w-4 hidden"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+</button>
+
+<script is:inline>
+  (function () {
+    const button = document.getElementById('theme-toggle');
+    if (!button) return;
+
+    const sun = button.querySelector('.theme-icon-sun');
+    const moon = button.querySelector('.theme-icon-moon');
+
+    function paintToggle(theme) {
+      const isDark = theme === 'dark';
+      // Mostrar el icono de la acción siguiente:
+      // si está oscuro, mostramos el sol (acción: ir a claro).
+      // si está claro, mostramos la luna (acción: ir a oscuro).
+      sun.classList.toggle('hidden', isDark);
+      moon.classList.toggle('hidden', !isDark);
+      button.setAttribute('aria-pressed', String(isDark));
+      button.setAttribute(
+        'aria-label',
+        isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro',
+      );
+    }
+
+    // Estado inicial: leer el data-theme que ya aplicó el script anti-FOUC.
+    paintToggle(document.documentElement.getAttribute('data-theme') || 'light');
+
+    button.addEventListener('click', () => {
+      const current =
+        document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try {
+        localStorage.setItem('eva-theme', next);
+      } catch (_) {
+        // Si localStorage no está disponible (modo privado, etc.),
+        // la elección se pierde al recargar. Aceptable.
+      }
+      paintToggle(next);
+    });
+  })();
+</script>

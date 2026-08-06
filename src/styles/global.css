@@ -25,37 +25,169 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --font-display:
+    "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
 }
 
-:root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(240 10% 3.9%);
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(240 10% 3.9%);
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(240 10% 3.9%);
-  --primary: hsl(346 77% 51%);
-  --primary-foreground: hsl(355.7 100% 97.3%);
-  --secondary: hsl(240 4.8% 95.9%);
-  --secondary-foreground: hsl(240 5.9% 10%);
-  --muted: hsl(240 4.8% 95.9%);
-  --muted-foreground: hsl(240 3.8% 46.1%);
-  --accent: hsl(346 77% 51%);
-  --accent-foreground: hsl(355.7 100% 97.3%);
-  --destructive: hsl(0 84.2% 60.2%);
-  --destructive-foreground: hsl(0 0% 98%);
-  --border: hsl(240 5.9% 90%);
-  --input: hsl(240 5.9% 90%);
-  --ring: hsl(346 77% 51%);
+/* ─────────────────────────────────────────────
+   MODO CLARO (default)
+   Crema cálido + tinta cálida + acento arcilla.
+   ───────────────────────────────────────────── */
+:root,
+[data-theme="light"] {
+  --background: hsl(36 33% 96%);          /* #FAF7F2 */
+  --foreground: hsl(20 8% 9%);            /* #1A1715 */
+  --card: hsl(36 33% 98%);                /* un punto más claro que el fondo */
+  --card-foreground: hsl(20 8% 9%);
+  --popover: hsl(36 33% 98%);
+  --popover-foreground: hsl(20 8% 9%);
+
+  --primary: hsl(8 58% 44%);              /* #B53D2A */
+  --primary-foreground: hsl(36 33% 97%);
+  --secondary: hsl(34 14% 90%);           /* tarjeta/superficie elevada */
+  --secondary-foreground: hsl(20 8% 9%);
+  --muted: hsl(34 14% 90%);
+  --muted-foreground: hsl(25 6% 36%);     /* #5C564F cuerpo */
+  --accent: hsl(8 58% 44%);
+  --accent-foreground: hsl(36 33% 97%);
+
+  --destructive: hsl(8 58% 44%);
+  --destructive-foreground: hsl(36 33% 97%);
+
+  --border: hsl(30 8% 82%);               /* separadores cálidos */
+  --input: hsl(30 8% 82%);
+  --ring: hsl(8 58% 44%);
+
   --radius: 0.75rem;
+
+  color-scheme: light;
+}
+
+/* ─────────────────────────────────────────────
+   MODO OSCURO
+   Carbón cálido (no negro puro) + acento arcilla
+   ligeramente más claro para mantener WCAG.
+   Mantiene la temperatura cálida del modo claro.
+   ───────────────────────────────────────────── */
+[data-theme="dark"] {
+  --background: hsl(20 10% 8%);           /* #15120F  carbón cálido */
+  --foreground: hsl(36 25% 92%);          /* #F1ECE3  tinta cálida clara */
+  --card: hsl(20 10% 11%);                /* un punto más claro que el fondo */
+  --card-foreground: hsl(36 25% 92%);
+  --popover: hsl(20 10% 11%);
+  --popover-foreground: hsl(36 25% 92%);
+
+  --primary: hsl(12 65% 58%);             /* #D26A4A arcilla más clara */
+  --primary-foreground: hsl(20 10% 8%);
+  --secondary: hsl(20 8% 14%);            /* superficie elevada sobre el fondo */
+  --secondary-foreground: hsl(36 25% 92%);
+  --muted: hsl(20 8% 14%);
+  --muted-foreground: hsl(30 10% 65%);    /* #A89F93 cuerpo */
+  --accent: hsl(12 65% 58%);
+  --accent-foreground: hsl(20 10% 8%);
+
+  --destructive: hsl(12 65% 58%);
+  --destructive-foreground: hsl(20 10% 8%);
+
+  --border: hsl(20 8% 22%);               /* separadores cálidos */
+  --input: hsl(20 8% 22%);
+  --ring: hsl(12 65% 58%);
+
+  color-scheme: dark;
+}
+
+/* Si el usuario nunca tocó el toggle, respetarle prefers-color-scheme. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --background: hsl(20 10% 8%);
+    --foreground: hsl(36 25% 92%);
+    --card: hsl(20 10% 11%);
+    --card-foreground: hsl(36 25% 92%);
+    --popover: hsl(20 10% 11%);
+    --popover-foreground: hsl(36 25% 92%);
+
+    --primary: hsl(12 65% 58%);
+    --primary-foreground: hsl(20 10% 8%);
+    --secondary: hsl(20 8% 14%);
+    --secondary-foreground: hsl(36 25% 92%);
+    --muted: hsl(20 8% 14%);
+    --muted-foreground: hsl(30 10% 65%);
+    --accent: hsl(12 65% 58%);
+    --accent-foreground: hsl(20 10% 8%);
+
+    --destructive: hsl(12 65% 58%);
+    --destructive-foreground: hsl(20 10% 8%);
+
+    --border: hsl(20 8% 22%);
+    --input: hsl(20 8% 22%);
+    --ring: hsl(12 65% 58%);
+
+    color-scheme: dark;
+  }
 }
 
 @layer base {
   * {
     border-color: var(--border);
   }
+  html {
+    /* Previene parpadeo del background nativo antes que el CSS cargue. */
+    background-color: var(--background);
+    color: var(--foreground);
+  }
   body {
     background-color: var(--background);
     color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+
+  /* Defaults para tipografía display (Fraunces). */
+  .font-display {
+    font-family: var(--font-display);
+    font-feature-settings: "ss01", "ss02";
+    font-optical-sizing: auto;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   SECCIÓN INVERTIDA
+   La sección "El protocolo" en el index.astro
+   debe verse *invertida* respecto al resto en
+   cualquier tema. Usamos tokens invertidos para
+   que la transición de tema se mantenga limpia.
+
+   Importante: los textos críticos de esta sección
+   deben leerse sin opacidades. Los tokens de aquí
+   ya representan colores sólidos legibles; cualquier
+   `opacity-*` aplicada en el HTML sobre .theme-inverted
+   puede romper el contraste WCAG y debe evitarse.
+   ───────────────────────────────────────────── */
+.theme-inverted {
+  --background: var(--foreground);
+  --foreground: var(--background);
+  --secondary: var(--foreground);
+  --secondary-foreground: var(--background);
+  --muted: var(--foreground);
+  --muted-foreground: var(--background);
+  /* Borde interno sutil: el foreground con mezcla baja,
+     no el ring (que en dark es arcilla brillante). */
+  --border: color-mix(in oklch, var(--foreground) 18%, transparent);
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+/* Accesibilidad: respetar usuarios con reduce-motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

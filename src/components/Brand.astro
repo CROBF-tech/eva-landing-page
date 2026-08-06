@@ -1,0 +1,41 @@
+---
+/**
+ * Brand — firma tipográfica de Eva.
+ *
+ * Sin logo todavía, la marca se reduce a una "E" enorme en Fraunces
+ * apoyada sobre el nombre en Inter. Deliberadamente sobrio:
+ * parece marca escrita a mano, no pretende ser un asset gráfico.
+ *
+ * Props:
+ *   size — "small" para navbar | "hero" para el bloque derecho del hero
+ */
+type Props = {
+  size?: 'small' | 'hero';
+};
+
+const { size = 'small' } = Astro.props;
+
+const isHero = size === 'hero';
+---
+
+<a href="/" class="group inline-flex items-baseline gap-2" aria-label="Eva — inicio">
+  <span
+    class:list={[
+      'font-display text-primary leading-[0.85] tracking-[-0.04em]',
+      isHero
+        ? 'text-[14rem] sm:text-[18rem] lg:text-[22rem]'
+        : 'text-3xl',
+    ]}
+    aria-hidden="true"
+  >
+    E
+  </span>
+  <span
+    class:list={[
+      'font-sans font-medium tracking-[0.18em] uppercase text-foreground',
+      isHero ? 'text-sm sm:text-base' : 'text-sm',
+    ]}
+  >
+    Eva
+  </span>
+</a>

@@ -1,123 +1,328 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import EmailForm from '../components/EmailForm.astro';
+import Brand from '../components/Brand.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 ---
 
 <Layout>
 	<main class="min-h-screen bg-background text-foreground">
-		<section class="relative overflow-hidden px-6 py-24 sm:py-32 lg:px-8">
-			<div class="mx-auto max-w-3xl text-center">
-				<h1 class="text-4xl font-semibold tracking-tight text-foreground sm:text-6xl">
-					Eva
-				</h1>
-				<p class="mt-6 text-xl text-muted-foreground sm:text-2xl">
-					Tu compañera antes de salir.
-				</p>
-				<p class="mt-4 text-lg text-muted-foreground">
-					Contale tu plan. Nosotros nos encargamos del resto.
-				</p>
-				<div class="mt-10 flex justify-center">
-					<EmailForm />
+		{/* ───────────── HEADER ───────────── */}
+		<header class="px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
+			<nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 sm:gap-5">
+				<Brand size="small" />
+				<div class="flex items-center gap-3 sm:gap-5">
+					<a
+						href="#sumate"
+						class="text-sm font-medium text-foreground/80 transition hover:text-primary focus:text-primary focus:outline-none"
+					>
+						Sumate →
+					</a>
+					<ThemeToggle />
+				</div>
+			</nav>
+		</header>
+
+		{/* ───────────── HERO ───────────── */}
+		<section class="px-4 pt-12 pb-20 sm:px-6 sm:pt-20 sm:pb-32 lg:px-8">
+			<div
+				class="mx-auto grid max-w-6xl items-end gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-16"
+			>
+				{/* Columna izquierda: tesis */}
+				<div class="relative">
+					<p
+						class="font-sans text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
+					>
+						Eva · para mujeres
+					</p>
+
+					<h1
+						class="font-display mt-6 text-[clamp(2.25rem,9vw,5.5rem)] font-medium leading-[1.02] tracking-[-0.025em] text-foreground"
+					>
+						Tu compañía
+						<span class="block italic text-primary">antes de salir.</span>
+					</h1>
+
+					<p
+						class="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:text-xl"
+					>
+						Contale tu plan a Eva — dónde vas, con quién y cuánto tiempo te lleva.
+						Si todo sale bien, confirmás que llegaste.
+						<span class="text-foreground">Si no podés hacerlo, Eva avisa.</span>
+					</p>
+
+					<div id="sumate" class="mt-10 max-w-md">
+						<EmailForm id="email-form-hero" />
+						<p class="mt-3 text-xs text-muted-foreground/80">
+							Te escribimos una vez, cuando Eva esté lista. Tu correo no se comparte.
+						</p>
+					</div>
+				</div>
+
+				{/* Columna derecha: firma tipográfica (decorativa: ya está en el header) */}
+				<div class="hidden lg:flex lg:justify-end lg:items-end" aria-hidden="true">
+					<Brand size="hero" />
 				</div>
 			</div>
 		</section>
 
-		<section class="px-6 py-16 sm:py-24 lg:px-8">
-			<div class="mx-auto max-w-3xl">
-				<h2 class="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-					¿Cómo funciona?
+		{/* ───────────── TRES SALIDAS ───────────── */}
+		<section class="border-t border-border/70 bg-secondary/40 px-4 py-20 sm:px-6 sm:py-32 lg:px-8">
+			<div class="mx-auto max-w-6xl">
+				<p
+					class="font-sans text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
+				>
+					Momentos
+				</p>
+				<h2
+					class="font-display mt-4 max-w-2xl text-3xl font-medium tracking-[-0.02em] text-foreground sm:text-5xl sm:leading-[1.05]"
+				>
+					Tres salidas que ya cambiaron con Eva.
 				</h2>
-				<ol class="mt-10 space-y-10">
-					<li class="flex gap-4">
-						<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground">1</span>
-						<div>
-							<h3 class="text-lg font-medium text-foreground">Creás un plan antes de salir</h3>
-							<p class="mt-2 text-muted-foreground">
-								Registrá el lugar, la actividad, el tiempo estimado y un mensaje para tus contactos seguros.
+
+				<div class="mt-12 space-y-12 sm:mt-16 sm:space-y-20">
+					{[
+						{
+							eyebrow: 'Volvés sola',
+							title: 'Tomar un taxi de noche.',
+							body: 'Antes de subir, contás cuánto tarda el viaje. Si Eva no recibe tu confirmación al llegar, le avisa a quien vos elegiste — con la ruta y la última ubicación.',
+						},
+						{
+							eyebrow: 'Quedás con alguien',
+							title: 'Conocer a una persona por primera vez.',
+							body: 'Dejás un plan con el lugar, la hora estimada y un mensaje. Tus contactos lo ven solo si algo no sale como esperabas.',
+						},
+						{
+							eyebrow: 'Te movés lejos',
+							title: 'Viajar con desconocidos.',
+							body: 'Un recorrido largo, un país nuevo. Eva reconstruye tu trayecto mientras se mueve el plan y lo entrega junto si la alerta se activa.',
+						},
+					].map((item) => (
+						<article class="grid gap-6 sm:grid-cols-[12rem_1fr] sm:gap-12">
+							<p class="font-sans text-xs font-medium uppercase tracking-[0.18em] text-primary">
+								{item.eyebrow}
 							</p>
-						</div>
-					</li>
-					<li class="flex gap-4">
-						<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground">2</span>
-						<div>
-							<h3 class="text-lg font-medium text-foreground">Eva hace el seguimiento</h3>
-							<p class="mt-2 text-muted-foreground">
-								Mientras el plan está activo, la app registra tu ubicación de forma discreta para poder reconstruir tu recorrido en caso de emergencia.
-							</p>
-						</div>
-					</li>
-					<li class="flex gap-4">
-						<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground">3</span>
-						<div>
-							<h3 class="text-lg font-medium text-foreground">Confirmás o extiendés el plan</h3>
-							<p class="mt-2 text-muted-foreground">
-								Cuando llega la hora, Eva te pregunta si todo está bien. Un toque basta para confirmar o agregar más tiempo.
-							</p>
-						</div>
-					</li>
-					<li class="flex gap-4">
-						<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-destructive font-semibold text-destructive-foreground">4</span>
-						<div>
-							<h3 class="text-lg font-medium text-foreground">Si no respondés, avisan</h3>
-							<p class="mt-2 text-muted-foreground">
-								Si se pasa el margen que definiste sin confirmación, Eva notifica automáticamente a tus contactos seguros con tu ubicación y la información del plan.
-							</p>
-						</div>
-					</li>
+							<div>
+								<h3 class="font-display text-2xl font-medium tracking-[-0.015em] text-foreground sm:text-3xl">
+									{item.title}
+								</h3>
+								<p class="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+									{item.body}
+								</p>
+							</div>
+						</article>
+					))}
+				</div>
+			</div>
+		</section>
+
+		{/* ───────────── CÓMO FUNCIONA ───────────── */}
+		<section class="px-4 py-20 sm:px-6 sm:py-32 lg:px-8">
+			<div class="mx-auto max-w-6xl">
+				<p
+					class="font-sans text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
+				>
+					Cómo funciona
+				</p>
+				<h2
+					class="font-display mt-4 max-w-2xl text-3xl font-medium tracking-[-0.02em] text-foreground sm:text-5xl sm:leading-[1.05]"
+				>
+					Cuatro pasos. Antes de salir.
+				</h2>
+
+				<ol class="mt-12 space-y-10 sm:mt-16 sm:space-y-16">
+					{[
+						{
+							n: '01',
+							title: 'Contás tu plan.',
+							body: 'Lugar, actividad, tiempo estimado, margen de error, un mensaje para tus contactos. Eva lo guarda.',
+						},
+						{
+							n: '02',
+							title: 'Eva empieza a registrar.',
+							body: 'Mientras el plan está activo, tu ubicación se guarda de forma discreta para reconstruir el recorrido si hace falta.',
+						},
+						{
+							n: '03',
+							title: 'Llega la hora, Eva te pregunta.',
+							body: 'Un toque para confirmar que estás bien. Otro para extender el seguimiento. No necesitás abrir la app.',
+						},
+						{
+							n: '04',
+							title: 'Si no respondés, Eva actúa.',
+							body: 'Pasado el margen que definiste, Eva notifica automáticamente a tus contactos seguros con la información del plan.',
+						},
+					].map((step) => (
+						<li class="grid items-baseline gap-6 sm:grid-cols-[8rem_1fr] sm:gap-12">
+							<span
+								class="font-display text-7xl font-light italic text-primary/70 sm:text-8xl"
+								aria-hidden="true"
+							>
+								{step.n}
+							</span>
+							<div>
+								<h3 class="font-display text-2xl font-medium tracking-[-0.015em] text-foreground sm:text-3xl">
+									{step.title}
+								</h3>
+								<p class="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+									{step.body}
+								</p>
+							</div>
+						</li>
+					))}
 				</ol>
 			</div>
 		</section>
 
-		<section class="bg-secondary/50 px-6 py-16 sm:py-24 lg:px-8">
-			<div class="mx-auto max-w-3xl">
-				<h2 class="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-					¿Qué hace a Eva diferente?
-				</h2>
-				<ul class="mt-10 grid gap-6 sm:grid-cols-2">
-					<li class="rounded-2xl border bg-card p-6 shadow-sm">
-						<h3 class="font-medium text-card-foreground">Confirmaciones inteligentes</h3>
-						<p class="mt-2 text-sm text-muted-foreground">
-							Nunca se dispara una alerta de inmediato. Primero Eva te consulta, con un margen de tiempo configurable.
-						</p>
-					</li>
-					<li class="rounded-2xl border bg-card p-6 shadow-sm">
-						<h3 class="font-medium text-card-foreground">PIN de seguridad</h3>
-						<p class="mt-2 text-sm text-muted-foreground">
-							Crear un plan, finalizar el seguimiento o confirmar que estás bien requiere tu PIN personal.
-						</p>
-					</li>
-					<li class="rounded-2xl border bg-card p-6 shadow-sm">
-						<h3 class="font-medium text-card-foreground">Alerta discreta</h3>
-						<p class="mt-2 text-sm text-muted-foreground">
-							En situaciones de coerción, Eva incluye un mecanismo silencioso que notifica a tus contactos sin levantar sospechas.
-						</p>
-					</li>
-					<li class="rounded-2xl border bg-card p-6 shadow-sm">
-						<h3 class="font-medium text-card-foreground">Privacidad primero</h3>
-						<p class="mt-2 text-sm text-muted-foreground">
-							Tu ubicación solo se comparte cuando se activa una alerta. Tus contactos seguros son lo único que importa.
-						</p>
-					</li>
+		{/* ───────────── SI NO RESPONDÉS ───────────── */}
+		<section class="theme-inverted px-4 py-20 sm:px-6 sm:py-32 lg:px-8">
+			<div class="mx-auto max-w-5xl">
+				<p
+					class="font-sans text-xs font-medium uppercase tracking-[0.2em] text-primary"
+				>
+					El protocolo
+				</p>
+				<p
+					class="font-display mt-8 text-3xl font-medium leading-[1.1] tracking-[-0.02em] sm:text-5xl sm:leading-[1.05]"
+				>
+					Si la confirmación no llega dentro del margen que vos misma definiste,
+					Eva envía automáticamente un mensaje a cada contacto seguro con todo lo
+					que necesita para actuar:
+				</p>
+
+				<ul class="mt-12 grid gap-6 sm:grid-cols-2 sm:gap-x-12 sm:gap-y-4">
+					{[
+						'Tu nombre y descripción del plan',
+						'El lugar previsto y la hora de inicio',
+						'La última ubicación registrada',
+						'El recorrido realizado hasta ese momento',
+						'Tu teléfono, para comunicarse',
+						'El mensaje que vos misma escribiste antes de salir',
+					].map((item) => (
+						<li class="flex items-baseline gap-3 text-base sm:text-lg">
+							<span class="font-display text-primary" aria-hidden="true">—</span>
+							<span>{item}</span>
+						</li>
+					))}
 				</ul>
+
+				<p
+					class="font-display mt-12 max-w-3xl text-lg italic leading-relaxed sm:text-xl"
+				>
+					El objetivo no es reemplazar a los servicios de emergencia. Es darles a
+					las personas que te quieren toda la información para que no pierdan
+					tiempo cuando más lo necesitás.
+				</p>
 			</div>
 		</section>
 
-		<section class="px-6 py-16 sm:py-24 lg:px-8">
-			<div class="mx-auto max-w-3xl text-center">
-				<h2 class="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-					Eva está en desarrollo.
+		{/* ───────────── LO QUE EVA NO HACE ───────────── */}
+		<section class="px-4 py-20 sm:px-6 sm:py-32 lg:px-8">
+			<div class="mx-auto max-w-5xl">
+				<p
+					class="font-sans text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
+				>
+					Lo que Eva no hace
+				</p>
+				<h2
+					class="font-display mt-4 max-w-2xl text-3xl font-medium tracking-[-0.02em] text-foreground sm:text-5xl sm:leading-[1.05]"
+				>
+					Lo que no vas a encontrar acá.
 				</h2>
-				<p class="mt-4 text-lg text-muted-foreground">
-					Dejanos tu correo y se la primera en saber cuándo esté lista.
+
+				<dl class="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2">
+					{[
+						{
+							dt: 'No comparte tu ubicación en tiempo real.',
+							dd: 'Mientras un plan está activo, los contactos seguros no ven dónde estás. Reciben información solo si la alerta se activa.',
+						},
+						{
+							dt: 'No vive pendiente de una emergencia.',
+							dd: 'Eva no busca detectar lo peor. Busca convertirse en un hábito antes de salir, como mandar "ya llegué".',
+						},
+						{
+							dt: 'No comparte datos con terceros.',
+							dd: 'Tu información no se vende ni se usa para publicidad. Solo vive para que el plan funcione.',
+						},
+						{
+							dt: 'No reemplaza a la policía ni al 911.',
+							dd: 'Eva es una capa previa de aviso. La decisión de llamar a emergencias siempre queda en quien te quiere.',
+						},
+					].map((item) => (
+						<div>
+							<dt class="font-display text-xl font-medium text-foreground sm:text-2xl">
+								{item.dt}
+							</dt>
+							<dd class="mt-2 text-base leading-relaxed text-muted-foreground">
+								{item.dd}
+							</dd>
+						</div>
+					))}
+				</dl>
+			</div>
+		</section>
+
+		{/* ───────────── MODO SILENCIOSO ───────────── */}
+		<section class="border-t border-border/70 bg-secondary/40 px-4 py-20 sm:px-6 sm:py-32 lg:px-8">
+			<div class="mx-auto max-w-3xl">
+				<p
+					class="font-sans text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
+				>
+					Para cuando no podés actuar libremente
+				</p>
+				<h2
+					class="font-display mt-4 text-3xl font-medium tracking-[-0.02em] text-foreground sm:text-5xl sm:leading-[1.05]"
+				>
+					Hay situaciones en las que avisar tampoco es una opción.
+				</h2>
+				<p
+					class="mt-8 text-lg leading-relaxed text-muted-foreground sm:text-xl"
+				>
+					Eva fue pensada también para esos momentos. Tiene un mecanismo pensado
+					para pedir ayuda sin que se note, sin botones visibles, sin gestos que
+					puedan delatarte frente a quien te esté apretando.
+				</p>
+				<p
+					class="mt-6 text-base italic leading-relaxed text-muted-foreground/80 sm:text-lg"
+				>
+					No lo describimos en detalle acá a propósito — para que solo vos sepas
+					cómo usarlo.
+				</p>
+			</div>
+		</section>
+
+		{/* ───────────── CTA FINAL ───────────── */}
+		<section class="px-4 py-20 sm:px-6 sm:py-32 lg:px-8">
+			<div class="mx-auto max-w-3xl text-center">
+				<h2
+					class="font-display text-3xl font-medium leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl lg:text-6xl"
+				>
+					Contale tu plan a Eva.
+					<span class="block italic text-primary">Nosotros nos encargamos del resto.</span>
+				</h2>
+				<p class="mt-6 text-lg text-muted-foreground">
+					Eva está en desarrollo. Dejanos tu correo y vas a ser de las primeras
+					en saber cuándo esté lista para descargar.
 				</p>
 				<div class="mt-10 flex justify-center">
-					<EmailForm />
+					<EmailForm id="email-form-cta" />
 				</div>
+				<p class="mt-4 text-xs text-muted-foreground/80">
+					Una sola comunicación, sin spam.
+				</p>
 			</div>
 		</section>
 
-		<footer class="border-t px-6 py-10 text-center text-sm text-muted-foreground">
-			<p>© {new Date().getFullYear()} Eva. Contale tu plan. Nosotros nos encargamos del resto.</p>
+		{/* ───────────── FOOTER ───────────── */}
+		<footer class="border-t border-border/70 px-4 py-10 sm:px-6 lg:px-8">
+			<div
+				class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row"
+			>
+				<p>© {new Date().getFullYear()} Eva. Hecho con cuidado.</p>
+				<p class="text-muted-foreground/80">
+					Contale tu plan. Nosotros nos encargamos del resto.
+				</p>
+			</div>
 		</footer>
 	</main>
 </Layout>
