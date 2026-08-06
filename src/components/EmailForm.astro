@@ -1,0 +1,77 @@
+---
+---
+
+<form
+  id="email-form"
+  action="/api/register"
+  method="POST"
+  class="flex w-full max-w-md flex-col gap-3 sm:flex-row"
+>
+  <input
+    type="email"
+    name="email"
+    placeholder="tu@email.com"
+    required
+    class="flex-1 rounded-xl border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+  />
+  <button
+    type="submit"
+    class="inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3 font-medium text-primary-foreground transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring"
+  >
+    <span id="btn-text">Suscribirme</span>
+    <span id="btn-loader" class="hidden">Guardando...</span>
+  </button>
+  <p id="form-message" class="sr-only" role="status" aria-live="polite"></p>
+</form>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById('email-form');
+    const btnText = document.getElementById('btn-text');
+    const btnLoader = document.getElementById('btn-loader');
+    const message = document.getElementById('form-message');
+
+    function setLoading(isLoading) {
+      btnText.classList.toggle('hidden', isLoading);
+      btnLoader.classList.toggle('hidden', !isLoading);
+      form.querySelector('button').disabled = isLoading;
+    }
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = type === 'success'
+        ? 'text-sm text-center w-full sm:col-span-2 text-primary font-medium'
+        : 'text-sm text-center w-full sm:col-span-2 text-destructive';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const email = formData.get('email');
+
+      setLoading(true);
+      showMessage('', 'success');
+
+      try {
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (response.ok) {
+          form.reset();
+          showMessage('¡Gracias! Te avisamos cuando Eva esté lista.', 'success');
+        } else {
+          showMessage(data.error || 'Hubo un error. Intentá de nuevo.', 'error');
+        }
+      } catch {
+        showMessage('No pudimos conectarnos. Intentá más tarde.', 'error');
+      } finally {
+        setLoading(false);
+      }
+    });
+  })();
+</script>

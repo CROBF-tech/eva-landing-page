@@ -1,11 +1,123 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import EmailForm from '../components/EmailForm.astro';
 ---
 
 <Layout>
-	<Welcome />
+	<main class="min-h-screen bg-background text-foreground">
+		<section class="relative overflow-hidden px-6 py-24 sm:py-32 lg:px-8">
+			<div class="mx-auto max-w-3xl text-center">
+				<h1 class="text-4xl font-semibold tracking-tight text-foreground sm:text-6xl">
+					Eva
+				</h1>
+				<p class="mt-6 text-xl text-muted-foreground sm:text-2xl">
+					Tu compañera antes de salir.
+				</p>
+				<p class="mt-4 text-lg text-muted-foreground">
+					Contale tu plan. Nosotros nos encargamos del resto.
+				</p>
+				<div class="mt-10 flex justify-center">
+					<EmailForm />
+				</div>
+			</div>
+		</section>
+
+		<section class="px-6 py-16 sm:py-24 lg:px-8">
+			<div class="mx-auto max-w-3xl">
+				<h2 class="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+					¿Cómo funciona?
+				</h2>
+				<ol class="mt-10 space-y-10">
+					<li class="flex gap-4">
+						<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground">1</span>
+						<div>
+							<h3 class="text-lg font-medium text-foreground">Creás un plan antes de salir</h3>
+							<p class="mt-2 text-muted-foreground">
+								Registrá el lugar, la actividad, el tiempo estimado y un mensaje para tus contactos seguros.
+							</p>
+						</div>
+					</li>
+					<li class="flex gap-4">
+						<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground">2</span>
+						<div>
+							<h3 class="text-lg font-medium text-foreground">Eva hace el seguimiento</h3>
+							<p class="mt-2 text-muted-foreground">
+								Mientras el plan está activo, la app registra tu ubicación de forma discreta para poder reconstruir tu recorrido en caso de emergencia.
+							</p>
+						</div>
+					</li>
+					<li class="flex gap-4">
+						<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground">3</span>
+						<div>
+							<h3 class="text-lg font-medium text-foreground">Confirmás o extiendés el plan</h3>
+							<p class="mt-2 text-muted-foreground">
+								Cuando llega la hora, Eva te pregunta si todo está bien. Un toque basta para confirmar o agregar más tiempo.
+							</p>
+						</div>
+					</li>
+					<li class="flex gap-4">
+						<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-destructive font-semibold text-destructive-foreground">4</span>
+						<div>
+							<h3 class="text-lg font-medium text-foreground">Si no respondés, avisan</h3>
+							<p class="mt-2 text-muted-foreground">
+								Si se pasa el margen que definiste sin confirmación, Eva notifica automáticamente a tus contactos seguros con tu ubicación y la información del plan.
+							</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</section>
+
+		<section class="bg-secondary/50 px-6 py-16 sm:py-24 lg:px-8">
+			<div class="mx-auto max-w-3xl">
+				<h2 class="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+					¿Qué hace a Eva diferente?
+				</h2>
+				<ul class="mt-10 grid gap-6 sm:grid-cols-2">
+					<li class="rounded-2xl border bg-card p-6 shadow-sm">
+						<h3 class="font-medium text-card-foreground">Confirmaciones inteligentes</h3>
+						<p class="mt-2 text-sm text-muted-foreground">
+							Nunca se dispara una alerta de inmediato. Primero Eva te consulta, con un margen de tiempo configurable.
+						</p>
+					</li>
+					<li class="rounded-2xl border bg-card p-6 shadow-sm">
+						<h3 class="font-medium text-card-foreground">PIN de seguridad</h3>
+						<p class="mt-2 text-sm text-muted-foreground">
+							Crear un plan, finalizar el seguimiento o confirmar que estás bien requiere tu PIN personal.
+						</p>
+					</li>
+					<li class="rounded-2xl border bg-card p-6 shadow-sm">
+						<h3 class="font-medium text-card-foreground">Alerta discreta</h3>
+						<p class="mt-2 text-sm text-muted-foreground">
+							En situaciones de coerción, Eva incluye un mecanismo silencioso que notifica a tus contactos sin levantar sospechas.
+						</p>
+					</li>
+					<li class="rounded-2xl border bg-card p-6 shadow-sm">
+						<h3 class="font-medium text-card-foreground">Privacidad primero</h3>
+						<p class="mt-2 text-sm text-muted-foreground">
+							Tu ubicación solo se comparte cuando se activa una alerta. Tus contactos seguros son lo único que importa.
+						</p>
+					</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="px-6 py-16 sm:py-24 lg:px-8">
+			<div class="mx-auto max-w-3xl text-center">
+				<h2 class="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+					Eva está en desarrollo.
+				</h2>
+				<p class="mt-4 text-lg text-muted-foreground">
+					Dejanos tu correo y se la primera en saber cuándo esté lista.
+				</p>
+				<div class="mt-10 flex justify-center">
+					<EmailForm />
+				</div>
+			</div>
+		</section>
+
+		<footer class="border-t px-6 py-10 text-center text-sm text-muted-foreground">
+			<p>© {new Date().getFullYear()} Eva. Contale tu plan. Nosotros nos encargamos del resto.</p>
+		</footer>
+	</main>
 </Layout>
