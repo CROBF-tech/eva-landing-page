@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "skills": {
+    "anti-ui-slop": {
+      "source": "uizze.com",
+      "sourceUrl": "https://uizze.com/",
+      "sourceType": "well-known",
+      "computedHash": "6b9dd39aa002396961c2c8fff61c622e372a14216d537adc24322a17066ba672",
+      "wellKnownDigest": "sha256:95568167c89fe454591dad6ffce4c9807486a097bc1408831bde22b882654914"
+    },
+    "copywriting": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/copywriting/SKILL.md",
+      "computedHash": "c8d63b1f77be04fd54981720de65697988810bd28331097dbe0aaf3e166d638a"
+    },
+    "landing-page-copywriter": {
+      "source": "onewave-ai/claude-skills",
+      "sourceType": "github",
+      "skillPath": "landing-page-copywriter/SKILL.md",
+      "computedHash": "f86f1a5d1f6138f935b1d2760c958a7f8179a8584e8526fbd176bdcf7ab48304"
+    },
+    "stop-slop": {
+      "source": "hardikpandya/stop-slop",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "617bf97d33162a6bd0da4f40a97aac589de58e5a6c9cf011ed6108992210e7cb"
+    },
+    "ui-design": {
+      "source": "uizze.com",
+      "sourceUrl": "https://uizze.com/",
+      "sourceType": "well-known",
+      "computedHash": "8ae9d5062940f66edd96e00330c2721879f0df843e09064833c44b83dc3f4d07",
+      "wellKnownDigest": "sha256:f5d380f5d82a53023ce85cca081d1732313e20efbbac0ed13318642819744334"
+    },
+    "ui-slop-score": {
+      "source": "uizze.com",
+      "sourceUrl": "https://uizze.com/",
+      "sourceType": "well-known",
+      "computedHash": "88f396b20e5e44af95ef0767c8c2b69dc167941d035b0fb4066e6d78d85ce867",
+      "wellKnownDigest": "sha256:39e567495a2d3e05715cfe471c8203a959f2288e6d90e229b5ba73e35b433565"
+    }
+  }
+}
