@@ -1,0 +1,162 @@
+---
+type Props = {
+  id?: string;
+};
+
+const { id = 'eva-modal' } = Astro.props;
+---
+
+<div
+  id={id}
+  data-eva-modal
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  aria-hidden="true"
+  class="pointer-events-none fixed inset-x-0 top-6 z-50 flex justify-center px-4 sm:top-10"
+>
+  <div
+    data-eva-modal-card
+    class="pointer-events-auto hidden w-full max-w-sm translate-y-[-8px] rounded-2xl border border-border bg-background/95 px-5 py-4 shadow-lg backdrop-blur transition-all duration-200 data-[tone=success]:border-primary/40 data-[tone=error]:border-destructive/40"
+  >
+    <div class="flex items-start gap-3">
+      <span
+        data-eva-modal-icon
+        aria-hidden="true"
+        class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full data-[tone=success]:bg-primary/15 data-[tone=error]:bg-destructive/15 data-[tone=success]:text-primary data-[tone=error]:text-destructive"
+      >
+        <svg
+          data-eva-modal-icon-success
+          class="hidden h-4 w-4"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M4.5 10.5l3.5 3.5L15.5 6.5"></path>
+        </svg>
+        <svg
+          data-eva-modal-icon-error
+          class="hidden h-4 w-4"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 5l10 10M15 5L5 15"></path>
+        </svg>
+      </span>
+      <p
+        data-eva-modal-message
+        class="flex-1 text-sm font-medium leading-relaxed text-foreground"
+      ></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  type Tone = 'success' | 'error';
+
+  type ModalElements = {
+    root: HTMLElement;
+    card: HTMLElement;
+    icon: HTMLElement;
+    iconSuccess: HTMLElement;
+    iconError: HTMLElement;
+    message: HTMLElement;
+  };
+
+  const AUTO_HIDE_MS = 2000;
+  const VISIBLE_CLASSES = ['translate-y-0', 'opacity-100'];
+  const HIDDEN_CLASSES = ['translate-y-[-8px]', 'opacity-0'];
+
+  const roots = document.querySelectorAll<HTMLElement>('[data-eva-modal]');
+
+  for (const root of Array.from(roots)) {
+    const card = root.querySelector<HTMLElement>('[data-eva-modal-card]');
+    const icon = root.querySelector<HTMLElement>('[data-eva-modal-icon]');
+    const iconSuccess = root.querySelector<HTMLElement>(
+      '[data-eva-modal-icon-success]'
+    );
+    const iconError = root.querySelector<HTMLElement>(
+      '[data-eva-modal-icon-error]'
+    );
+    const message = root.querySelector<HTMLElement>('[data-eva-modal-message]');
+
+    if (!card || !icon || !iconSuccess || !iconError || !message) continue;
+
+    const els: ModalElements = {
+      root,
+      card,
+      icon,
+      iconSuccess,
+      iconError,
+      message,
+    };
+
+    let hideTimer: number | null = null;
+
+    const show = (tone: Tone, msg: string) => {
+      if (hideTimer !== null) {
+        window.clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+
+      els.message.textContent = msg;
+      els.card.dataset.tone = tone;
+      els.icon.dataset.tone = tone;
+      els.iconSuccess.classList.toggle('hidden', tone !== 'success');
+      els.iconError.classList.toggle('hidden', tone !== 'error');
+
+      els.card.classList.remove('hidden');
+      // doble rAF para que la transición arranque desde el estado inicial
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          els.card.classList.remove(...HIDDEN_CLASSES);
+          els.card.classList.add(...VISIBLE_CLASSES);
+        });
+      });
+
+      els.root.setAttribute('aria-hidden', 'false');
+
+      hideTimer = window.setTimeout(() => hide(), AUTO_HIDE_MS);
+    };
+
+    const hide = () => {
+      if (hideTimer !== null) {
+        window.clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+
+      els.card.classList.remove(...VISIBLE_CLASSES);
+      els.card.classList.add(...HIDDEN_CLASSES);
+
+      window.setTimeout(() => {
+        els.card.classList.add('hidden');
+        els.root.setAttribute('aria-hidden', 'true');
+      }, 220);
+    };
+
+    // API global para que los formularios la invoquen
+    type EvaModalApi = {
+      success: (msg: string) => void;
+      error: (msg: string) => void;
+      hide: () => void;
+    };
+
+    type EvaModalRegistry = Record<string, EvaModalApi>;
+
+    const registry = ((window as unknown as { __evaModal?: EvaModalRegistry })
+      .__evaModal ??= {});
+
+    registry[root.id] = {
+      success: (msg) => show('success', msg),
+      error: (msg) => show('error', msg),
+      hide,
+    };
+  }
+</script>

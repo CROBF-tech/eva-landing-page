@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Modal from '../components/Modal.astro';
 
 const description =
   'Eva es tu compañía antes de salir. Contale tu plan y, si no respondés a tiempo, Eva avisa a tus contactos seguros con tu ubicación y la información del recorrido.';
@@ -78,5 +79,6 @@ const description =
 	</head>
 	<body class="antialiased">
 		<slot />
+		<Modal id="eva-modal" />
 	</body>
 </html>

@@ -7,8 +7,6 @@ const { id = 'email-form' } = Astro.props;
 const inputId = `${id}-input`;
 const textId = `${id}-btn-text`;
 const loaderId = `${id}-btn-loader`;
-const messageId = `${id}-message`;
-const errorId = `${id}-error`;
 ---
 
 <form
@@ -36,20 +34,6 @@ const errorId = `${id}-error`;
     <span id={textId} data-slot="btn-text">Avisame cuando Eva esté lista</span>
     <span id={loaderId} data-slot="btn-loader" class="hidden">Guardando...</span>
   </button>
-  <p
-    id={errorId}
-    data-slot="error"
-    class="hidden text-sm text-destructive sm:col-span-2"
-    role="alert"
-    aria-live="polite"
-  ></p>
-  <p
-    id={messageId}
-    data-slot="message"
-    class="hidden text-sm font-medium text-primary sm:col-span-2"
-    role="status"
-    aria-live="polite"
-  ></p>
 </form>
 
 <script>
@@ -60,8 +44,18 @@ const errorId = `${id}-error`;
     button: HTMLButtonElement;
     text: HTMLElement;
     loader: HTMLElement;
-    error: HTMLElement;
-    message: HTMLElement;
+  };
+
+  type EvaModalApi = {
+    success: (msg: string) => void;
+    error: (msg: string) => void;
+  };
+
+  const getModal = (): EvaModalApi | undefined => {
+    const registry = (window as unknown as { __evaModal?: Record<string, EvaModalApi> })
+      .__evaModal;
+    if (!registry) return undefined;
+    return registry['eva-modal'];
   };
 
   const forms = document.querySelectorAll<HTMLFormElement>('form[data-email-form]');
@@ -72,12 +66,10 @@ const errorId = `${id}-error`;
       button: form.querySelector<HTMLButtonElement>('button[type="submit"]') ?? undefined,
       text: form.querySelector<HTMLElement>('[data-slot="btn-text"]') ?? undefined,
       loader: form.querySelector<HTMLElement>('[data-slot="btn-loader"]') ?? undefined,
-      error: form.querySelector<HTMLElement>('[data-slot="error"]') ?? undefined,
-      message: form.querySelector<HTMLElement>('[data-slot="message"]') ?? undefined,
     };
 
     if (Object.values(slots).some((el) => !el)) continue;
-    const { input, button, text, loader, error, message } = slots as Slots;
+    const { input, button, text, loader } = slots as Slots;
 
     const setLoading = (isLoading: boolean) => {
       text.classList.toggle('hidden', isLoading);
@@ -86,38 +78,16 @@ const errorId = `${id}-error`;
       input.disabled = isLoading;
     };
 
-    const showError = (msg: string) => {
-      error.textContent = msg;
-      error.classList.remove('hidden');
-      message.classList.add('hidden');
-      message.textContent = '';
-    };
-
-    const showSuccess = (msg: string) => {
-      message.textContent = msg;
-      message.classList.remove('hidden');
-      error.classList.add('hidden');
-      error.textContent = '';
-    };
-
-    const clearMessages = () => {
-      error.classList.add('hidden');
-      error.textContent = '';
-      message.classList.add('hidden');
-      message.textContent = '';
-    };
-
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       if (!input.checkValidity()) {
-        showError('Ingresá un correo electrónico válido.');
         input.reportValidity();
+        getModal()?.error('Ingresá un correo electrónico válido.');
         return;
       }
 
       setLoading(true);
-      clearMessages();
 
       const payload = { email: input.value.trim() };
       const { error: actionError } = await actions.joinWaitlist(payload);
@@ -125,13 +95,15 @@ const errorId = `${id}-error`;
       if (actionError) {
         if (isInputError(actionError)) {
           const firstField = Object.values(actionError.fields).flat()[0];
-          showError(firstField ?? 'Revisá los datos e intentá de nuevo.');
+          getModal()?.error(firstField ?? 'Revisá los datos e intentá de nuevo.');
         } else {
-          showError(actionError.message ?? 'No pudimos guardar tu correo. Intentá más tarde.');
+          getModal()?.error(
+            actionError.message ?? 'No pudimos guardar tu correo. Intentá más tarde.'
+          );
         }
       } else {
         form.reset();
-        showSuccess('Gracias. Te avisamos cuando Eva esté lista.');
+        getModal()?.success('Gracias. Te avisamos cuando Eva esté lista.');
       }
 
       setLoading(false);
