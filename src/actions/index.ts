@@ -9,8 +9,11 @@ const waitlistInput = z.object({
     .string()
     .trim()
     .max(500, 'La nota no puede superar los 500 caracteres')
+    .nullable()
     .optional()
-    .transform((value) => (value && value.length > 0 ? value : null)),
+    .transform((value) =>
+      value && value.length > 0 ? value : null
+    ),
 });
 
 export const server = {
