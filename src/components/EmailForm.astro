@@ -119,8 +119,8 @@ const errorId = `${id}-error`;
       setLoading(true);
       clearMessages();
 
-      const formData = new FormData(form);
-      const { error: actionError } = await actions.joinWaitlist(formData);
+      const payload = { email: input.value.trim() };
+      const { error: actionError } = await actions.joinWaitlist(payload);
 
       if (actionError) {
         if (isInputError(actionError)) {

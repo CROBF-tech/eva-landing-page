@@ -3,6 +3,8 @@ import { z } from 'zod';
 import { randomUUID } from 'node:crypto';
 import { isDatabaseConfigured, turso } from '../db/client';
 
+type WaitlistInput = z.infer<typeof waitlistInput>;
+
 const waitlistInput = z.object({
   email: z.email('Correo electrónico inválido').trim().toLowerCase(),
   note: z
@@ -11,18 +13,23 @@ const waitlistInput = z.object({
     .max(500, 'La nota no puede superar los 500 caracteres')
     .nullable()
     .optional()
-    .transform((value) =>
+    .transform((value): string | null =>
       value && value.length > 0 ? value : null
     ),
 });
 
+type JoinWaitlistResult =
+  | { ok: true; email: string; persisted: boolean };
+
 export const server = {
   joinWaitlist: defineAction({
-    accept: 'form',
+    accept: 'json',
     input: waitlistInput,
-    handler: async ({ email, note }) => {
+    handler: async (input: WaitlistInput): Promise<JoinWaitlistResult> => {
+      const { email, note } = input;
+
       if (!isDatabaseConfigured || !turso) {
-        return { ok: true as const, email, persisted: false };
+        return { ok: true, email, persisted: false };
       }
 
       try {
@@ -31,7 +38,7 @@ export const server = {
           args: [randomUUID(), email, Date.now(), note],
         });
 
-        return { ok: true as const, email, persisted: true };
+        return { ok: true, email, persisted: true };
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
 
