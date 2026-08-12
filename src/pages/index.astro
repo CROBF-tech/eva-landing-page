@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import EmailForm from '../components/EmailForm.astro';
 import Brand from '../components/Brand.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
 ---
 
 <Layout>
@@ -310,6 +311,31 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 				<p class="mt-4 text-xs text-muted-foreground/80">
 					Una sola comunicación, sin spam.
 				</p>
+			</div>
+		</section>
+
+		{/* ───────────── DEJANOS TU NOTA ───────────── */}
+		<section class="border-t border-border/70 bg-secondary/40 px-4 py-20 sm:px-6 sm:py-32 lg:px-8">
+			<div class="mx-auto max-w-3xl">
+				<p
+					class="font-sans text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
+				>
+					Sumate y contanos
+				</p>
+				<h2
+					class="font-display mt-4 text-3xl font-medium leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl"
+				>
+					Dejanos tu correo
+					<span class="block italic text-primary">y, si querés, una nota.</span>
+				</h2>
+				<p class="mt-6 text-lg leading-relaxed text-muted-foreground sm:text-xl">
+					Tu correo es para avisarte cuando Eva esté lista. La nota es
+					opcional: un mensaje, una idea, una situación que te gustaría que
+					resolvamos. Leemos cada una.
+				</p>
+				<div class="mt-10">
+					<WaitlistForm id="waitlist-form" />
+				</div>
 			</div>
 		</section>
 

@@ -1,0 +1,49 @@
+import { defineAction, ActionError } from 'astro:actions';
+import { z } from 'zod';
+import { randomUUID } from 'node:crypto';
+import { isDatabaseConfigured, turso } from '../db/client';
+
+const waitlistInput = z.object({
+  email: z.email('Correo electrónico inválido').trim().toLowerCase(),
+  note: z
+    .string()
+    .trim()
+    .max(500, 'La nota no puede superar los 500 caracteres')
+    .optional()
+    .transform((value) => (value && value.length > 0 ? value : null)),
+});
+
+export const server = {
+  joinWaitlist: defineAction({
+    accept: 'form',
+    input: waitlistInput,
+    handler: async ({ email, note }) => {
+      if (!isDatabaseConfigured || !turso) {
+        return { ok: true as const, email, persisted: false };
+      }
+
+      try {
+        await turso.execute({
+          sql: 'INSERT INTO waitlist (id, email, timestamp, note) VALUES (?, ?, ?, ?)',
+          args: [randomUUID(), email, Date.now(), note],
+        });
+
+        return { ok: true as const, email, persisted: true };
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+
+        if (message.includes('UNIQUE constraint failed')) {
+          throw new ActionError({
+            code: 'CONFLICT',
+            message: 'Este correo ya está anotado en la lista.',
+          });
+        }
+
+        throw new ActionError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'No pudimos guardar tu correo. Intentá más tarde.',
+        });
+      }
+    },
+  }),
+};

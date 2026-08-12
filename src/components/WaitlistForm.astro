@@ -3,8 +3,9 @@ type Props = {
   id?: string;
 };
 
-const { id = 'email-form' } = Astro.props;
-const inputId = `${id}-input`;
+const { id = 'waitlist-form' } = Astro.props;
+const emailId = `${id}-email`;
+const noteId = `${id}-note`;
 const textId = `${id}-btn-text`;
 const loaderId = `${id}-btn-loader`;
 const messageId = `${id}-message`;
@@ -14,39 +15,46 @@ const errorId = `${id}-error`;
 <form
   id={id}
   method="POST"
-  data-email-form
+  data-waitlist-form
   novalidate
-  class="flex w-full max-w-md flex-col gap-3 sm:flex-row"
+  class="flex w-full max-w-xl flex-col gap-3"
 >
-  <label class="sr-only" for={inputId}>Tu correo electrónico</label>
-  <input
-    id={inputId}
-    type="email"
-    name="email"
-    placeholder="tu@email.com"
-    required
-    autocomplete="email"
-    maxlength="254"
-    class="flex-1 rounded-xl border border-input bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40"
-  />
-  <button
-    type="submit"
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-xl bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring/50 disabled:opacity-70 sm:px-6 sm:text-base"
-  >
-    <span id={textId} data-slot="btn-text">Avisame cuando Eva esté lista</span>
-    <span id={loaderId} data-slot="btn-loader" class="hidden">Guardando...</span>
-  </button>
-  <p
-    id={errorId}
-    data-slot="error"
-    class="hidden text-sm text-destructive sm:col-span-2"
-    role="alert"
-    aria-live="polite"
-  ></p>
+  <div class="flex flex-col gap-3 sm:flex-row">
+    <label class="sr-only" for={emailId}>Tu correo electrónico</label>
+    <input
+      id={emailId}
+      type="email"
+      name="email"
+      placeholder="tu@email.com"
+      required
+      autocomplete="email"
+      maxlength="254"
+      class="flex-1 rounded-xl border border-input bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40"
+    />
+    <button
+      type="submit"
+      class="inline-flex items-center justify-center whitespace-nowrap rounded-xl bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring/50 disabled:opacity-70 sm:px-6 sm:text-base"
+    >
+      <span id={textId} data-slot="btn-text">Sumarme a la lista</span>
+      <span id={loaderId} data-slot="btn-loader" class="hidden">Guardando...</span>
+    </button>
+  </div>
+
+  <label class="sr-only" for={noteId}>Una nota opcional (mensaje u opinión)</label>
+  <textarea
+    id={noteId}
+    name="note"
+    rows="3"
+    maxlength="500"
+    placeholder="Si querés, dejanos un mensaje, una idea o lo que te gustaría ver en Eva."
+    class="w-full resize-none rounded-xl border border-input bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40"
+  ></textarea>
+
+  <p id={errorId} data-slot="error" class="hidden text-sm text-destructive" role="alert" aria-live="polite"></p>
   <p
     id={messageId}
     data-slot="message"
-    class="hidden text-sm font-medium text-primary sm:col-span-2"
+    class="hidden text-sm text-primary"
     role="status"
     aria-live="polite"
   ></p>
@@ -57,6 +65,7 @@ const errorId = `${id}-error`;
 
   type Slots = {
     input: HTMLInputElement;
+    note: HTMLTextAreaElement;
     button: HTMLButtonElement;
     text: HTMLElement;
     loader: HTMLElement;
@@ -64,11 +73,12 @@ const errorId = `${id}-error`;
     message: HTMLElement;
   };
 
-  const forms = document.querySelectorAll<HTMLFormElement>('form[data-email-form]');
+  const forms = document.querySelectorAll<HTMLFormElement>('form[data-waitlist-form]');
 
   for (const form of Array.from(forms)) {
     const slots: Partial<Slots> = {
       input: form.querySelector<HTMLInputElement>('input[name="email"]') ?? undefined,
+      note: form.querySelector<HTMLTextAreaElement>('textarea[name="note"]') ?? undefined,
       button: form.querySelector<HTMLButtonElement>('button[type="submit"]') ?? undefined,
       text: form.querySelector<HTMLElement>('[data-slot="btn-text"]') ?? undefined,
       loader: form.querySelector<HTMLElement>('[data-slot="btn-loader"]') ?? undefined,
@@ -77,13 +87,14 @@ const errorId = `${id}-error`;
     };
 
     if (Object.values(slots).some((el) => !el)) continue;
-    const { input, button, text, loader, error, message } = slots as Slots;
+    const { input, note, button, text, loader, error, message } = slots as Slots;
 
     const setLoading = (isLoading: boolean) => {
       text.classList.toggle('hidden', isLoading);
       loader.classList.toggle('hidden', !isLoading);
       button.disabled = isLoading;
       input.disabled = isLoading;
+      note.disabled = isLoading;
     };
 
     const showError = (msg: string) => {
