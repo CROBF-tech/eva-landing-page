@@ -20,6 +20,12 @@
       "skillPath": "landing-page-copywriter/SKILL.md",
       "computedHash": "f86f1a5d1f6138f935b1d2760c958a7f8179a8584e8526fbd176bdcf7ab48304"
     },
+    "legal-writing": {
+      "source": "anthropics/claude-for-legal",
+      "sourceType": "github",
+      "skillPath": "law-student/skills/legal-writing/SKILL.md",
+      "computedHash": "a64d83fa68da47f168a6796ada0e7249b0eff25534b387582d074fd3c24f12aa"
+    },
     "stop-slop": {
       "source": "hardikpandya/stop-slop",
       "sourceType": "github",

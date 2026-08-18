@@ -4,7 +4,8 @@ import Brand from '../components/Brand.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 
 const lastUpdated = '18 de agosto de 2026';
-const contactEmail = 'contacto@crob.app';
+const contactEmail = 'info@crobf.tech';
+const companyName = 'CROBF';
 ---
 
 <Layout
@@ -51,7 +52,13 @@ const contactEmail = 'contacto@crob.app';
 							1. Qué es Eva
 						</h2>
 						<p class="mt-4">
-							Eva es una aplicación móvil y web desarrollada por CROBF que permite a las usuarias registrar un plan de salida, definir un tiempo estimado de llegada y seleccionar contactos de confianza. Si la usuaria no confirma que llegó sana y salva dentro del margen que ella misma configuró, Eva intenta notificar automáticamente a esos contactos con la información del plan y la última ubicación registrada.
+							Eva es una aplicación móvil y web desarrollada por {companyName} que permite a las usuarias registrar un plan de salida, definir un tiempo estimado de llegada y seleccionar contactos de confianza. Si la usuaria no confirma que llegó sana y salva dentro del margen que ella misma configuró, Eva intenta notificar automáticamente a esos contactos con la información del plan y la última ubicación registrada.
+						</p>
+						<p class="mt-4">
+							Estos términos regulan el uso de la app y los servicios asociados. Al crear una cuenta o usar Eva, aceptás estar vinculada por este documento y por la{' '}
+							<a href="/privacidad" class="text-primary underline underline-offset-2 transition hover:opacity-80 focus:opacity-80 focus:outline-none">
+								Política de privacidad
+							</a>.
 						</p>
 					</section>
 
@@ -70,7 +77,7 @@ const contactEmail = 'contacto@crob.app';
 								<strong class="text-foreground">
 									Eva no garantiza que una alerta sea recibida o atendida.
 								</strong>{' '}
-								Aunque Eva intenta enviar notificaciones push, correos electrónicos y, cuando está configurado, mensajes SMS, el envío depende de factores ajenos a CROBF: cobertura de red, batería del dispositivo, permisos otorgados, configuración del proveedor de correo, bloqueo de remitentes, entre otros.
+								Aunque Eva intenta enviar notificaciones push, correos electrónicos y, cuando está configurado, mensajes SMS, el envío depende de factores ajenos a {companyName}. Estos factores incluyen, pero no se limitan a: cobertura de red, batería del dispositivo, permisos otorgados, configuración del proveedor de correo y posibles bloqueos de remitentes.
 							</p>
 							<p class="rounded-lg border border-border/70 bg-secondary/40 p-4 italic text-foreground/90">
 								Eva ayuda a mantener informadas a las personas en las que confiás, pero no reemplaza los servicios de emergencia ni garantiza que una alerta sea recibida o atendida.
@@ -83,7 +90,7 @@ const contactEmail = 'contacto@crob.app';
 							3. Requisitos de edad
 						</h2>
 						<p class="mt-4">
-							Para crear una cuenta en Eva debés tener al menos 13 años. Si tenés entre 13 y 18 años, debés usar la app bajo la supervisión de un adulto responsable. Al registrarte, declarás que cumplís con este requisito.
+							Para crear una cuenta en Eva debés tener al menos 13 años. Si tenés entre 13 y 18 años, te recomendamos usar la app bajo la supervisión de un adulto responsable. Al registrarte, declarás que cumplís con este requisito.
 						</p>
 					</section>
 
@@ -99,9 +106,9 @@ const contactEmail = 'contacto@crob.app';
 							<li>Mantener tu dispositivo con batería, conexión a internet y permisos necesarios activos.</li>
 							<li>Confirmar o extender tu plan cuando llegás a destino para evitar alertas accidentales.</li>
 							<li>
-								No usar Eva para acosar, vigilar, espiar, amenazar ni para ningún propósito que vulnere la privacidad, la intimidad o la seguridad de otra persona.
+								No usar Eva para acosar, vigilar, espiar, amenazar, intimidar ni para ningún propósito que vulnere la privacidad, la intimidad o la seguridad de otra persona.
 							</li>
-							<li>No usar Eva para enviar información falsa, engañosa o abusiva.</li>
+							<li>No usar Eva para enviar información falsa, engañosa, abusiva o para generar alertas falsas.</li>
 						</ul>
 					</section>
 
@@ -121,17 +128,17 @@ const contactEmail = 'contacto@crob.app';
 						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
 							6. Limitaciones del servicio
 						</h2>
-						<p class="mt-4">Eva depende de múltiples factores técnicos y ambientales. CROBF no garantiza el funcionamiento ininterrumpido ni libre de errores. Algunas limitaciones incluyen:</p>
+						<p class="mt-4">Eva depende de múltiples factores técnicos y ambientales. {companyName} no garantiza el funcionamiento ininterrumpido ni libre de errores. Algunas limitaciones incluyen, entre otras:</p>
 						<ul class="mt-4 list-disc space-y-2 pl-5 marker:text-primary">
 							<li>Señal GPS, Wi-Fi o datos móviles.</li>
 							<li>Nivel de batería del dispositivo.</li>
 							<li>Permisos de ubicación y notificaciones otorgados por la usuaria.</li>
-							<li>Estado de los servidores, servicios de push y proveedores de mensajería.</li>
+							<li>Estado de los servidores, servicios de push y proveedores de mensajería de terceros.</li>
 							<li>Configuraciones del dispositivo o de la red que bloqueen notificaciones.</li>
-							<li>Uso en primer plano: Eva registra ubicación mientras la app está activa o en uso.</li>
+							<li>Uso en primer plano: Eva registra ubicación mientras la app está activa o en primer plano.</li>
 						</ul>
 						<p class="mt-4">
-							CROBF no se hace responsable por alertas que no se envíen, no se reciban o no se atiendan como consecuencia de estas limitaciones.
+							En la medida máxima permitida por la ley aplicable, {companyName} no se hace responsable por alertas que no se envíen, no se reciban o no se atiendan como consecuencia de estas limitaciones.
 						</p>
 					</section>
 
@@ -140,7 +147,7 @@ const contactEmail = 'contacto@crob.app';
 							7. Cuenta, suspensión y terminación
 						</h2>
 						<p class="mt-4">
-							CROBF se reserva el derecho de suspender o eliminar cuentas que usen Eva de forma contraria a estos términos, que generen alertas falsas, abusivas o que pongan en riesgo a terceros.
+							{companyName} se reserva el derecho de suspender o eliminar cuentas que usen Eva de forma contraria a estos términos, que generen alertas falsas, abusivas o que pongan en riesgo a terceros. Cuando sea razonablemente posible, te avisaremos antes de suspender una cuenta, salvo que la suspensión sea necesaria para proteger la seguridad de personas o sistemas.
 						</p>
 						<p class="mt-4">
 							La usuaria puede solicitar la eliminación de su cuenta escribiendo a{' '}
@@ -158,7 +165,7 @@ const contactEmail = 'contacto@crob.app';
 							8. Modificaciones del servicio
 						</h2>
 						<p class="mt-4">
-							CROBF puede actualizar, modificar o suspender funcionalidades de Eva en cualquier momento. Haremos lo posible por avisar con antelación cuando un cambio afecte el uso habitual de la app.
+							{companyName} puede actualizar, modificar o suspender funcionalidades de Eva en cualquier momento. Cuando un cambio afecte de forma sustancial el uso habitual de la app, te lo notificaremos con al menos 30 días de antelación mediante la app o por correo electrónico.
 						</p>
 					</section>
 
@@ -167,7 +174,7 @@ const contactEmail = 'contacto@crob.app';
 							9. Propiedad intelectual
 						</h2>
 						<p class="mt-4">
-							Todos los derechos sobre la marca, el código, el diseño y los contenidos de Eva pertenecen a CROBF. No está permitido copiar, modificar, distribuir ni realizar ingeniería inversa sobre la app sin autorización expresa.
+							Todos los derechos sobre la marca, el código, el diseño y los contenidos de Eva pertenecen a {companyName}. No está permitido copiar, modificar, distribuir ni realizar ingeniería inversa sobre la app sin autorización expresa.
 						</p>
 					</section>
 
@@ -176,7 +183,7 @@ const contactEmail = 'contacto@crob.app';
 							10. Ley aplicable y contacto
 						</h2>
 						<p class="mt-4">
-							Estos términos se rigen por las leyes de la República Argentina. Para cualquier consulta sobre estos términos, podés escribirnos a{' '}
+							Estos términos se rigen por las leyes de la República Argentina. [VERIFY: confirmar domicilio legal de {companyName} para completar jurisdicción y notificaciones.] Para cualquier consulta sobre estos términos, podés escribirnos a{' '}
 							<a href={`mailto:${contactEmail}`} class="text-primary underline underline-offset-2 transition hover:opacity-80 focus:opacity-80 focus:outline-none">
 								{contactEmail}
 							</a>.

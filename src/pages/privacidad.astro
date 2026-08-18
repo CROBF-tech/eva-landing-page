@@ -4,7 +4,7 @@ import Brand from '../components/Brand.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 
 const lastUpdated = '18 de agosto de 2026';
-const contactEmail = 'contacto@crob.app';
+const contactEmail = 'info@crobf.tech';
 const companyName = 'CROBF';
 ---
 
@@ -53,7 +53,7 @@ const companyName = 'CROBF';
 						</h2>
 						<p class="mt-4">
 							El responsable del tratamiento de los datos personales recolectados a través de Eva es{' '}
-							<strong class="text-foreground">{companyName}</strong>, desarrolladora de la aplicación.
+							<strong class="text-foreground">{companyName}</strong>, desarrolladora de la aplicación. [VERIFY: completar con razón social, CUIT/CUIL, domicilio legal y país de residencia del responsable.]
 						</p>
 						<p class="mt-4">
 							Para consultas sobre esta política, ejercer tus derechos o solicitar la eliminación de tu cuenta, escribinos a{' '}
@@ -73,7 +73,7 @@ const companyName = 'CROBF';
 								<strong class="text-foreground">Nombre completo:</strong> para identificarte en la app y en las alertas enviadas a tus contactos.
 							</li>
 							<li>
-								<strong class="text-foreground">Correo electrónico:</strong> para iniciar sesión, como identificador único de tu cuenta y, si sos contacto de emergencia de otra usuaria, para recibir alertas por email.
+								<strong class="text-foreground">Correo electrónico:</strong> para iniciar sesión y como identificador único de tu cuenta. Si otra usuaria te designa como contacto de emergencia, tu correo también se usa para enviarte alertas por email.
 							</li>
 							<li>
 								<strong class="text-foreground">Contraseña:</strong> almacenada de forma hasheada con bcrypt. No guardamos la contraseña en texto plano.
@@ -101,17 +101,21 @@ const companyName = 'CROBF';
 
 					<section>
 						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
-							3. Para qué usamos tus datos
+							3. Base legal y finalidades
 						</h2>
-						<p class="mt-4">Cada dato se usa para una función específica de Eva:</p>
+						<p class="mt-4">Tratamos tus datos personales sobre las siguientes bases:</p>
 						<ul class="mt-4 list-disc space-y-2 pl-5 marker:text-primary">
-							<li>Autenticarte y proteger tu cuenta.</li>
-							<li>Mostrarte un saludo personalizado y tu perfil.</li>
-							<li>Recordarte que confirmes o extiendas una protección activa.</li>
-							<li>Enviar alertas a tus contactos de emergencia si no confirmás tu llegada.</li>
-							<li>Compartir con esos contactos la última ubicación registrada y el recorrido, solo cuando la protección pasa a estado de alerta.</li>
-							<li>Mantener un respaldo inmutable del plan y de los contactos en el momento de la alerta.</li>
+							<li>
+								<strong class="text-foreground">Ejecución del contrato de uso:</strong> para autenticarte, mostrar tu perfil, recordarte confirmaciones y enviar alertas.
+							</li>
+							<li>
+								<strong class="text-foreground">Consentimiento:</strong> para compartir ubicación y datos de contactos de emergencia cuando se activa una alerta. Al configurar una protección, vos decidís quién recibe esa información.
+							</li>
+							<li>
+								<strong class="text-foreground">Interés legítimo:</strong> para mantener la seguridad de la app, prevenir abusos y cumplir con obligaciones legales.
+							</li>
 						</ul>
+						<p class="mt-4">Cada dato se usa para una función específica: autenticarte, mostrarte un saludo personalizado, recordarte que confirmes o extiendas una protección activa, enviar alertas a tus contactos de emergencia si no confirmás tu llegada, compartir con esos contactos la última ubicación registrada y el recorrido solo cuando la protección pasa a estado de alerta, y mantener un respaldo inmutable del plan y de los contactos en el momento de la alerta.</p>
 					</section>
 
 					<section>
@@ -129,7 +133,7 @@ const companyName = 'CROBF';
 								<strong class="text-foreground">Turso / libSQL:</strong> aloja la base de datos donde se guardan todos los datos persistentes de la aplicación.
 							</li>
 							<li>
-								<strong class="text-foreground">Vercel:</strong> ejecuta el backend serverless y los procesos programados.
+								<strong class="text-foreground">Vercel:</strong> ejecuta el backend serverless y los procesos programados. No procesa los datos de forma independiente fuera de la operación del servicio.
 							</li>
 							<li>
 								<strong class="text-foreground">Expo Push Service:</strong> recibe tu push token y el contenido de las notificaciones para entregarlas a tu dispositivo.
@@ -167,7 +171,7 @@ const companyName = 'CROBF';
 							<li>Expo Push Service, Twilio y el proveedor SMTP usan conexiones cifradas.</li>
 						</ul>
 						<p class="mt-4">
-							En el dispositivo, el token de sesión (JWT) se guarda en AsyncStorage. Hoy AsyncStorage no está cifrado por defecto. Estamos evaluando migrar a almacenamiento seguro en versiones futuras.
+							<strong class="text-foreground">Limitación en el dispositivo:</strong> el token de sesión (JWT) se guarda en AsyncStorage. AsyncStorage no está cifrado por defecto, lo que representa una limitación de seguridad actual. Estamos evaluando migrar a almacenamiento seguro (expo-secure-store) en versiones futuras.
 						</p>
 					</section>
 
@@ -188,7 +192,7 @@ const companyName = 'CROBF';
 							8. Conservación de los datos
 						</h2>
 						<p class="mt-4">
-							Conservamos tus datos personales mientras mantengas una cuenta activa en Eva. Si eliminás tu cuenta, borramos tus datos personales en un plazo de 30 días, salvo aquellos que debamos conservar para cumplir con obligaciones legales o resolver disputas.
+							Conservamos tus datos personales mientras mantengas una cuenta activa en Eva. Si solicitás la eliminación de tu cuenta, procesamos la solicitud dentro de los 30 días siguientes a la confirmación de tu identidad, salvo aquellos datos que debamos conservar para cumplir con obligaciones legales o resolver disputas.
 						</p>
 						<p class="mt-4">
 							Los registros de ubicación y las snapshots de protecciones finalizadas se conservan durante el tiempo que la cuenta esté activa. Podés pedirnos su eliminación escribiendo a{' '}
@@ -204,17 +208,17 @@ const companyName = 'CROBF';
 						</h2>
 						<p class="mt-4">Podés ejercer los siguientes derechos sobre tus datos personales:</p>
 						<ul class="mt-4 list-disc space-y-2 pl-5 marker:text-primary">
-							<li>Acceder a tus datos.</li>
+							<li>Acceder a la información que tenemos sobre vos.</li>
 							<li>Corregir información incorrecta desde la app (nombre y teléfono).</li>
-							<li>Eliminar tu cuenta y tus datos.</li>
-							<li>Solicitar una copia de tus datos.</li>
-							<li>Revocar tu consentimiento.</li>
+							<li>Solicitar la eliminación de tu cuenta y de tus datos personales.</li>
+							<li>Solicitar información sobre el origen, las finalidades y los destinatarios de tus datos.</li>
+							<li>Revocar tu consentimiento en cualquier momento.</li>
 						</ul>
 						<p class="mt-4">
 							Para ejercer cualquiera de estos derechos, escribinos a{' '}
 							<a href={`mailto:${contactEmail}`} class="text-primary underline underline-offset-2 transition hover:opacity-80 focus:opacity-80 focus:outline-none">
 								{contactEmail}
-							</a>. Respondemos en un plazo de 30 días.
+							</a>. Respondemos en un plazo de 30 días hábiles desde la recepción de tu solicitud completa.
 						</p>
 					</section>
 
@@ -223,7 +227,7 @@ const companyName = 'CROBF';
 							10. Cambios en esta política
 						</h2>
 						<p class="mt-4">
-							Podemos actualizar esta política cuando sea necesario. Si hacemos cambios importantes, te avisaremos desde la app o por correo electrónico. La fecha de la última revisión aparece al inicio de este documento.
+							Podemos actualizar esta política cuando sea necesario. Cuando hagamos cambios sustanciales, te lo notificaremos con al menos 30 días de antelación mediante la app o por correo electrónico. La fecha de la última revisión aparece al inicio de este documento.
 						</p>
 					</section>
 				</div>
