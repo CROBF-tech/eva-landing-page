@@ -1,0 +1,25 @@
+---
+interface Props {
+	text: string;
+	label?: string;
+	position?: 'top' | 'bottom';
+}
+
+const { text, label, position = 'top' } = Astro.props;
+---
+
+<span class="group relative inline-block align-baseline" tabindex="0" aria-describedby={undefined}>
+	{label && <span class="sr-only">{label} </span>}
+	<span class="cursor-help border-b border-dotted border-primary/70 text-foreground transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 rounded-sm">
+		<slot />
+	</span>
+	<span
+		class:list={[
+			'pointer-events-none absolute left-1/2 z-10 w-64 -translate-x-1/2 rounded-lg border border-border/80 bg-background p-3 text-sm leading-snug text-foreground shadow-lg opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 sm:w-72',
+			position === 'top' ? 'bottom-full mb-2' : 'top-full mt-2',
+		]}
+		role="tooltip"
+	>
+		{text}
+	</span>
+</span>

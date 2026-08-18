@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Brand from '../components/Brand.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
+import Tooltip from '../components/Tooltip.astro';
 
 const lastUpdated = '18 de agosto de 2026';
 const contactEmail = 'info@crobf.tech';
@@ -49,7 +50,7 @@ const companyName = 'CROBF';
 				<div class="mt-12 space-y-10 text-base leading-relaxed text-foreground/90 sm:space-y-12">
 					<section>
 						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
-							1. Responsable del tratamiento
+							1. Responsable de tus datos
 						</h2>
 						<p class="mt-4">
 							El responsable del tratamiento de los datos personales recolectados a través de Eva es{' '}
@@ -73,49 +74,52 @@ const companyName = 'CROBF';
 								<strong class="text-foreground">Nombre completo:</strong> para identificarte en la app y en las alertas enviadas a tus contactos.
 							</li>
 							<li>
-								<strong class="text-foreground">Correo electrónico:</strong> para iniciar sesión y como identificador único de tu cuenta. Si otra usuaria te designa como contacto de emergencia, tu correo también se usa para enviarte alertas por email.
+								<strong class="text-foreground">Correo electrónico:</strong> para iniciar sesión y como identificador único de tu cuenta. Si otra usuaria te designa como contacto de emergencia, tu correo también se usa para enviarte alertas.
 							</li>
 							<li>
-								<strong class="text-foreground">Contraseña:</strong> almacenada de forma hasheada con bcrypt. No guardamos la contraseña en texto plano.
+								<strong class="text-foreground">Contraseña:</strong> la guardamos de forma encriptada usando un sistema llamado bcrypt. No guardamos tu contraseña en texto legible.
+								<Tooltip text="bcrypt es un algoritmo que transforma tu contraseña en un código irreversible, para que nadie pueda leerla, ni siquiera nosotros." label="Información sobre bcrypt">bcrypt</Tooltip>.
 							</li>
 							<li>
 								<strong class="text-foreground">Teléfono (opcional):</strong> para mostrarlo en tu perfil y para que tus contactos puedan llamarte si se activa una alerta.
 							</li>
 							<li>
-								<strong class="text-foreground">Contactos de emergencia:</strong> nombre, teléfono y, opcionalmente, email de las personas que elegís como contactos seguros. Se guarda también una copia inmutable de esos datos al momento de crear cada protección.
+								<strong class="text-foreground">Contactos de emergencia:</strong> nombre, teléfono y, opcionalmente, email de las personas que elegís como contactos seguros. Guardamos una copia fija de esos datos al momento de crear cada protección.
 							</li>
 							<li>
-								<strong class="text-foreground">Ubicación GPS:</strong> latitud, longitud y precisión. Se registra aproximadamente cada 60 segundos mientras una protección está activa y la app está en primer plano.
+								<strong class="text-foreground">Ubicación GPS:</strong> tu posición aproximada. Se registra cada cierto tiempo mientras una protección está activa y la app está abierta.
 							</li>
 							<li>
-								<strong class="text-foreground">Push token:</strong> el identificador que Expo Push Service asigna a tu dispositivo para enviarte recordatorios y alertas.
+								<strong class="text-foreground">Identificador de notificaciones:</strong> un código que tu dispositivo comparte con nuestro servicio de notificaciones para enviarte recordatorios y alertas.
 							</li>
 							<li>
 								<strong class="text-foreground">Plan de protección:</strong> destino, tiempo estimado, margen de seguridad, notas y mensaje que escribiste para tus contactos.
 							</li>
 						</ul>
 						<p class="mt-4">
-							No usamos cámara, micrófono, galería, contactos del dispositivo, biometría ni almacenamiento multimedia. No incluimos SDKs de analytics ni publicidad.
+							No usamos cámara, micrófono, galería, contactos del dispositivo, biometría ni almacenamiento multimedia. No incluimos herramientas de análisis de comportamiento ni publicidad.
 						</p>
 					</section>
 
 					<section>
 						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
-							3. Base legal y finalidades
+							3. Para qué usamos tus datos
 						</h2>
 						<p class="mt-4">Tratamos tus datos personales sobre las siguientes bases:</p>
 						<ul class="mt-4 list-disc space-y-2 pl-5 marker:text-primary">
 							<li>
-								<strong class="text-foreground">Ejecución del contrato de uso:</strong> para autenticarte, mostrar tu perfil, recordarte confirmaciones y enviar alertas.
+								<strong class="text-foreground">Para que la app funcione:</strong> para autenticarte, mostrar tu perfil, recordarte confirmaciones y enviar alertas.
 							</li>
 							<li>
-								<strong class="text-foreground">Consentimiento:</strong> para compartir ubicación y datos de contactos de emergencia cuando se activa una alerta. Al configurar una protección, vos decidís quién recibe esa información.
+								<strong class="text-foreground">Con tu consentimiento:</strong> para compartir tu ubicación y datos de contactos de emergencia cuando se activa una alerta. Al configurar una protección, vos decidís quién recibe esa información.
 							</li>
 							<li>
-								<strong class="text-foreground">Interés legítimo:</strong> para mantener la seguridad de la app, prevenir abusos y cumplir con obligaciones legales.
+								<strong class="text-foreground">Por un interés legítimo:</strong> para mantener la seguridad de la app, prevenir abusos y cumplir con obligaciones legales.
 							</li>
 						</ul>
-						<p class="mt-4">Cada dato se usa para una función específica: autenticarte, mostrarte un saludo personalizado, recordarte que confirmes o extiendas una protección activa, enviar alertas a tus contactos de emergencia si no confirmás tu llegada, compartir con esos contactos la última ubicación registrada y el recorrido solo cuando la protección pasa a estado de alerta, y mantener un respaldo inmutable del plan y de los contactos en el momento de la alerta.</p>
+						<p class="mt-4">
+							Cada dato se usa para una función específica: autenticarte, mostrarte un saludo personalizado, recordarte que confirmes o extiendas una protección activa, enviar alertas a tus contactos de emergencia si no confirmás tu llegada, compartir con esos contactos la última ubicación registrada y el recorrido solo cuando se activa una alerta, y mantener un registro fijo del plan y de los contactos en el momento de la alerta.
+						</p>
 					</section>
 
 					<section>
@@ -130,19 +134,13 @@ const companyName = 'CROBF';
 								<strong class="text-foreground">Tus contactos de emergencia:</strong> reciben tu nombre, destino, mensaje, teléfono, última ubicación y recorrido únicamente si se activa una alerta.
 							</li>
 							<li>
-								<strong class="text-foreground">Turso / libSQL:</strong> aloja la base de datos donde se guardan todos los datos persistentes de la aplicación.
+								<strong class="text-foreground">Servicio de notificaciones push:</strong> recibe el identificador de tu dispositivo y el contenido de las notificaciones para enviarte recordatorios y alertas.
 							</li>
 							<li>
-								<strong class="text-foreground">Vercel:</strong> ejecuta el backend serverless y los procesos programados. No procesa los datos de forma independiente fuera de la operación del servicio.
+								<strong class="text-foreground">Servicio de envío de correos:</strong> envía los correos de alerta a tus contactos de emergencia. Solo recibe la dirección de email del contacto y el contenido del mensaje.
 							</li>
 							<li>
-								<strong class="text-foreground">Expo Push Service:</strong> recibe tu push token y el contenido de las notificaciones para entregarlas a tu dispositivo.
-							</li>
-							<li>
-								<strong class="text-foreground">Proveedor SMTP:</strong> envía los correos de alerta a los contactos de emergencia. El proveedor específico se configura por entorno.
-							</li>
-							<li>
-								<strong class="text-foreground">Twilio (opcional):</strong> si el servicio está configurado, envía SMS de alerta. Solo recibe el número de teléfono del contacto y el cuerpo del mensaje.
+								<strong class="text-foreground">Servicio de mensajes SMS (opcional):</strong> si está configurado, envía SMS de alerta. Solo recibe el número de teléfono del contacto y el cuerpo del mensaje.
 							</li>
 						</ul>
 					</section>
@@ -152,10 +150,10 @@ const companyName = 'CROBF';
 							5. Ubicación
 						</h2>
 						<p class="mt-4">
-							Eva usa tu ubicación en primer plano. Mientras una protección está activa, enviamos tu posición al backend aproximadamente cada 60 segundos. Esto permite reconstruir el recorrido si se activa una alerta.
+							Eva usa tu ubicación mientras la app está abierta. Mientras una protección está activa, enviamos tu posición a nuestros servidores cada cierto tiempo. Esto permite reconstruir el recorrido si se activa una alerta.
 						</p>
 						<p class="mt-4">
-							La ubicación no se muestra a tus contactos en tiempo real. Solo se revela la última posición registrada a través del enlace de seguimiento cuando la protección pasa a estado <strong class="text-foreground">ALERTED</strong>.
+							La ubicación no se muestra a tus contactos en tiempo real. Solo se revela la última posición registrada a través del enlace de seguimiento cuando se activa una alerta.
 						</p>
 					</section>
 
@@ -165,13 +163,15 @@ const companyName = 'CROBF';
 						</h2>
 						<p class="mt-4">Tomamos medidas para proteger tu información:</p>
 						<ul class="mt-4 list-disc space-y-2 pl-5 marker:text-primary">
-							<li>Las contraseñas se almacenan hasheadas con bcrypt (12 rondas).</li>
-							<li>La comunicación entre la app y el backend usa HTTPS en producción.</li>
-							<li>Turso cifra los datos en tránsito y en reposo.</li>
-							<li>Expo Push Service, Twilio y el proveedor SMTP usan conexiones cifradas.</li>
+							<li>Las contraseñas se almacenan encriptadas.</li>
+							<li>La comunicación entre la app y nuestros servidores usa conexiones seguras (
+								<Tooltip text="HTTPS es un protocolo que cifra la información que viaja entre tu dispositivo y nuestros servidores, para que terceros no puedan leerla." label="Información sobre HTTPS">HTTPS</Tooltip>
+								) en producción.</li>
+							<li>La base de datos cifra los datos en tránsito y en reposo.</li>
+							<li>Los servicios de notificaciones, correo y SMS usan conexiones cifradas.</li>
 						</ul>
 						<p class="mt-4">
-							<strong class="text-foreground">Limitación en el dispositivo:</strong> el token de sesión (JWT) se guarda en AsyncStorage. AsyncStorage no está cifrado por defecto, lo que representa una limitación de seguridad actual. Estamos evaluando migrar a almacenamiento seguro (expo-secure-store) en versiones futuras.
+							<strong class="text-foreground">Limitación en el dispositivo:</strong> el identificador que mantiene tu sesión iniciada se guarda en el almacenamiento local de la app. Ese almacenamiento no está cifrado por defecto, lo que representa una limitación de seguridad actual. Estamos evaluando migrar a un almacenamiento más seguro en versiones futuras.
 						</p>
 					</section>
 
@@ -181,8 +181,8 @@ const companyName = 'CROBF';
 						</h2>
 						<p class="mt-4">Eva te pide los siguientes permisos:</p>
 						<ul class="mt-4 list-disc space-y-2 pl-5 marker:text-primary">
-							<li>Ubicación en primer plano (iOS y Android) para registrar tu recorrido durante una protección activa.</li>
-							<li>Notificaciones push para enviarte recordatorios y alertas.</li>
+							<li>Ubicación mientras la app está abierta (iOS y Android) para registrar tu recorrido durante una protección activa.</li>
+							<li>Notificaciones para enviarte recordatorios y alertas.</li>
 						</ul>
 						<p class="mt-4">Podés revocar estos permisos desde la configuración de tu dispositivo en cualquier momento, aunque algunas funciones dejarán de funcionar.</p>
 					</section>
@@ -195,7 +195,7 @@ const companyName = 'CROBF';
 							Conservamos tus datos personales mientras mantengas una cuenta activa en Eva. Si solicitás la eliminación de tu cuenta, procesamos la solicitud dentro de los 30 días siguientes a la confirmación de tu identidad, salvo aquellos datos que debamos conservar para cumplir con obligaciones legales o resolver disputas.
 						</p>
 						<p class="mt-4">
-							Los registros de ubicación y las snapshots de protecciones finalizadas se conservan durante el tiempo que la cuenta esté activa. Podés pedirnos su eliminación escribiendo a{' '}
+							Los registros de ubicación y las copias de protecciones finalizadas se conservan durante el tiempo que la cuenta esté activa. Podés pedirnos su eliminación escribiendo a{' '}
 							<a href={`mailto:${contactEmail}`} class="text-primary underline underline-offset-2 transition hover:opacity-80 focus:opacity-80 focus:outline-none">
 								{contactEmail}
 							</a>.

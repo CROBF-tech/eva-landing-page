@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Brand from '../components/Brand.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
+import Tooltip from '../components/Tooltip.astro';
 
 const lastUpdated = '18 de agosto de 2026';
 const contactEmail = 'info@crobf.tech';
@@ -68,16 +69,12 @@ const companyName = 'CROBF';
 						</h2>
 						<div class="mt-4 space-y-4">
 							<p>
-								<strong class="text-foreground">
-									Eva no es un servicio de emergencias.
-								</strong>{' '}
+								<strong class="text-foreground">Eva no es un servicio de emergencias.</strong>{' '}
 								No reemplaza a la policía, a los servicios de rescate, al 911 ni a ningún organismo de seguridad pública.
 							</p>
 							<p>
-								<strong class="text-foreground">
-									Eva no garantiza que una alerta sea recibida o atendida.
-								</strong>{' '}
-								Aunque Eva intenta enviar notificaciones push, correos electrónicos y, cuando está configurado, mensajes SMS, el envío depende de factores ajenos a {companyName}. Estos factores incluyen, pero no se limitan a: cobertura de red, batería del dispositivo, permisos otorgados, configuración del proveedor de correo y posibles bloqueos de remitentes.
+								<strong class="text-foreground">Eva no garantiza que una alerta sea recibida o atendida.</strong>{' '}
+								Aunque Eva intenta enviar notificaciones a tu dispositivo, correos electrónicos y, cuando está configurado, mensajes SMS, el envío depende de factores ajenos a {companyName}. Estos factores incluyen, pero no se limitan a: cobertura de red, batería del dispositivo, permisos otorgados, configuración del proveedor de correo y posibles bloqueos de remitentes.
 							</p>
 							<p class="rounded-lg border border-border/70 bg-secondary/40 p-4 italic text-foreground/90">
 								Eva ayuda a mantener informadas a las personas en las que confiás, pero no reemplaza los servicios de emergencia ni garantiza que una alerta sea recibida o atendida.
@@ -105,9 +102,7 @@ const companyName = 'CROBF';
 							<li>Verificar que tus contactos de confianza conocen el funcionamiento de Eva y aceptan recibir alertas.</li>
 							<li>Mantener tu dispositivo con batería, conexión a internet y permisos necesarios activos.</li>
 							<li>Confirmar o extender tu plan cuando llegás a destino para evitar alertas accidentales.</li>
-							<li>
-								No usar Eva para acosar, vigilar, espiar, amenazar, intimidar ni para ningún propósito que vulnere la privacidad, la intimidad o la seguridad de otra persona.
-							</li>
+							<li>No usar Eva para acosar, vigilar, espiar, amenazar, intimidar ni para ningún propósito que vulnere la privacidad, la intimidad o la seguridad de otra persona.</li>
 							<li>No usar Eva para enviar información falsa, engañosa, abusiva o para generar alertas falsas.</li>
 						</ul>
 					</section>
@@ -117,10 +112,10 @@ const companyName = 'CROBF';
 							5. Responsabilidades de los contactos de emergencia
 						</h2>
 						<p class="mt-4">
-							Los contactos que una usuaria agrega reciben alertas automáticas cuando se activa el protocolo de seguridad. Al ser designados como contactos de confianza, aceptan recibir notificaciones push, correos electrónicos y, en su caso, mensajes SMS con datos de ubicación e información del plan.
+							Los contactos que una usuaria agrega reciben alertas automáticas cuando se activa el protocolo de seguridad. Al ser designados como contactos de confianza, aceptan recibir notificaciones en su dispositivo, correos electrónicos y, en su caso, mensajes SMS con datos de ubicación e información del plan.
 						</p>
 						<p class="mt-4">
-							CROBF no controla ni garantiza la reacción de esos contactos. La decisión de llamar a servicios de emergencia, buscar a la usuaria o tomar cualquier otra acción es exclusiva de cada contacto.
+							{companyName} no controla ni garantiza la reacción de esos contactos. La decisión de llamar a servicios de emergencia, buscar a la usuaria o tomar cualquier otra acción es exclusiva de cada contacto.
 						</p>
 					</section>
 
@@ -128,14 +123,16 @@ const companyName = 'CROBF';
 						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
 							6. Limitaciones del servicio
 						</h2>
-						<p class="mt-4">Eva depende de múltiples factores técnicos y ambientales. {companyName} no garantiza el funcionamiento ininterrumpido ni libre de errores. Algunas limitaciones incluyen, entre otras:</p>
+						<p class="mt-4">
+							Eva depende de múltiples factores técnicos y ambientales. {companyName} no garantiza el funcionamiento ininterrumpido ni libre de errores. Algunas limitaciones incluyen, entre otras:
+						</p>
 						<ul class="mt-4 list-disc space-y-2 pl-5 marker:text-primary">
-							<li>Señal GPS, Wi-Fi o datos móviles.</li>
+							<li>Señal de GPS, Wi-Fi o datos móviles.</li>
 							<li>Nivel de batería del dispositivo.</li>
 							<li>Permisos de ubicación y notificaciones otorgados por la usuaria.</li>
-							<li>Estado de los servidores, servicios de push y proveedores de mensajería de terceros.</li>
+							<li>Estado de los servidores y de los servicios de mensajería de terceros.</li>
 							<li>Configuraciones del dispositivo o de la red que bloqueen notificaciones.</li>
-							<li>Uso en primer plano: Eva registra ubicación mientras la app está activa o en primer plano.</li>
+							<li>Uso en primer plano: Eva registra ubicación mientras la app está abierta.</li>
 						</ul>
 						<p class="mt-4">
 							En la medida máxima permitida por la ley aplicable, {companyName} no se hace responsable por alertas que no se envíen, no se reciban o no se atiendan como consecuencia de estas limitaciones.
