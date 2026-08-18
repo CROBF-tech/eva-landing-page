@@ -2,8 +2,17 @@
 import '../styles/global.css';
 import Modal from '../components/Modal.astro';
 
-const description =
-  'Eva es tu compañía antes de salir. Contale tu plan y, si no respondés a tiempo, Eva avisa a tus contactos seguros con tu ubicación y la información del recorrido.';
+interface Props {
+  title?: string;
+  description?: string;
+  ogTitle?: string;
+}
+
+const {
+  title = 'Eva · Tu compañía antes de salir',
+  description = 'Eva es tu compañía antes de salir. Contale tu plan y, si no respondés a tiempo, Eva avisa a tus contactos seguros con tu ubicación y la información del recorrido.',
+  ogTitle = 'Eva · Tu compañera antes de salir',
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -20,9 +29,9 @@ const description =
 		    vía el toggle). Ver script anti-FOUC abajo. */}
 		<meta id="theme-color-meta" name="theme-color" content="#FAF7F2" />
 		<meta property="og:description" content={description} />
-		<meta property="og:title" content="Eva · Tu compañera antes de salir" />
+		<meta property="og:title" content={ogTitle} />
 		<meta property="og:type" content="website" />
-		<title>Eva · Tu compañía antes de salir</title>
+		<title>{title}</title>
 
 		{/* Anti-FOUC: aplica el tema antes que el body se renderice, y sincroniza
 		    el <meta name="theme-color"> con el token --background real. Un

@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Brand from '../components/Brand.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+const lastUpdated = '18 de agosto de 2026';
+const contactEmail = 'contacto@crob.app';
+---
+
+<Layout
+	title="Términos y condiciones · Eva"
+	description="Términos y condiciones de uso de Eva."
+	ogTitle="Términos y condiciones · Eva"
+>
+	<main class="min-h-screen bg-background text-foreground">
+		{/* HEADER */}
+		<header class="px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
+			<nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 sm:gap-5">
+				<a href="/" class="transition hover:opacity-80 focus:opacity-80 focus:outline-none">
+					<span class="sr-only">Eva, volver al inicio</span>
+					<Brand size="small" />
+				</a>
+				<div class="flex items-center gap-3 sm:gap-5">
+					<a
+						href="/privacidad"
+						class="text-sm font-medium text-foreground/80 transition hover:text-primary focus:text-primary focus:outline-none"
+					>
+						Privacidad
+					</a>
+					<ThemeToggle />
+				</div>
+			</nav>
+		</header>
+
+		{/* CONTENT */}
+		<article class="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+			<div class="mx-auto max-w-3xl">
+				<p class="font-sans text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+					Documentos legales
+				</p>
+				<h1 class="font-display mt-4 text-3xl font-medium tracking-[-0.02em] text-foreground sm:text-5xl sm:leading-[1.05]">
+					Términos y condiciones de uso
+				</h1>
+				<p class="mt-4 text-sm text-muted-foreground">
+					Última actualización: {lastUpdated}
+				</p>
+
+				<div class="mt-12 space-y-10 text-base leading-relaxed text-foreground/90 sm:space-y-12">
+					<section>
+						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
+							1. Qué es Eva
+						</h2>
+						<p class="mt-4">
+							Eva es una aplicación móvil y web desarrollada por CROBF que permite a las usuarias registrar un plan de salida, definir un tiempo estimado de llegada y seleccionar contactos de confianza. Si la usuaria no confirma que llegó sana y salva dentro del margen que ella misma configuró, Eva intenta notificar automáticamente a esos contactos con la información del plan y la última ubicación registrada.
+						</p>
+					</section>
+
+					<section>
+						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
+							2. Qué Eva no es
+						</h2>
+						<div class="mt-4 space-y-4">
+							<p>
+								<strong class="text-foreground">
+									Eva no es un servicio de emergencias.
+								</strong>{' '}
+								No reemplaza a la policía, a los servicios de rescate, al 911 ni a ningún organismo de seguridad pública.
+							</p>
+							<p>
+								<strong class="text-foreground">
+									Eva no garantiza que una alerta sea recibida o atendida.
+								</strong>{' '}
+								Aunque Eva intenta enviar notificaciones push, correos electrónicos y, cuando está configurado, mensajes SMS, el envío depende de factores ajenos a CROBF: cobertura de red, batería del dispositivo, permisos otorgados, configuración del proveedor de correo, bloqueo de remitentes, entre otros.
+							</p>
+							<p class="rounded-lg border border-border/70 bg-secondary/40 p-4 italic text-foreground/90">
+								Eva ayuda a mantener informadas a las personas en las que confiás, pero no reemplaza los servicios de emergencia ni garantiza que una alerta sea recibida o atendida.
+							</p>
+						</div>
+					</section>
+
+					<section>
+						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
+							3. Requisitos de edad
+						</h2>
+						<p class="mt-4">
+							Para crear una cuenta en Eva debés tener al menos 13 años. Si tenés entre 13 y 18 años, debés usar la app bajo la supervisión de un adulto responsable. Al registrarte, declarás que cumplís con este requisito.
+						</p>
+					</section>
+
+					<section>
+						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
+							4. Responsabilidades de la usuaria
+						</h2>
+						<p class="mt-4">Al usar Eva, vos te comprometés a:</p>
+						<ul class="mt-4 list-disc space-y-2 pl-5 marker:text-primary">
+							<li>Mantener tu contraseña segura y no compartir tu cuenta.</li>
+							<li>Informar datos veraces, especialmente la información de contactos de emergencia.</li>
+							<li>Verificar que tus contactos de confianza conocen el funcionamiento de Eva y aceptan recibir alertas.</li>
+							<li>Mantener tu dispositivo con batería, conexión a internet y permisos necesarios activos.</li>
+							<li>Confirmar o extender tu plan cuando llegás a destino para evitar alertas accidentales.</li>
+							<li>
+								No usar Eva para acosar, vigilar, espiar, amenazar ni para ningún propósito que vulnere la privacidad, la intimidad o la seguridad de otra persona.
+							</li>
+							<li>No usar Eva para enviar información falsa, engañosa o abusiva.</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
+							5. Responsabilidades de los contactos de emergencia
+						</h2>
+						<p class="mt-4">
+							Los contactos que una usuaria agrega reciben alertas automáticas cuando se activa el protocolo de seguridad. Al ser designados como contactos de confianza, aceptan recibir notificaciones push, correos electrónicos y, en su caso, mensajes SMS con datos de ubicación e información del plan.
+						</p>
+						<p class="mt-4">
+							CROBF no controla ni garantiza la reacción de esos contactos. La decisión de llamar a servicios de emergencia, buscar a la usuaria o tomar cualquier otra acción es exclusiva de cada contacto.
+						</p>
+					</section>
+
+					<section>
+						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
+							6. Limitaciones del servicio
+						</h2>
+						<p class="mt-4">Eva depende de múltiples factores técnicos y ambientales. CROBF no garantiza el funcionamiento ininterrumpido ni libre de errores. Algunas limitaciones incluyen:</p>
+						<ul class="mt-4 list-disc space-y-2 pl-5 marker:text-primary">
+							<li>Señal GPS, Wi-Fi o datos móviles.</li>
+							<li>Nivel de batería del dispositivo.</li>
+							<li>Permisos de ubicación y notificaciones otorgados por la usuaria.</li>
+							<li>Estado de los servidores, servicios de push y proveedores de mensajería.</li>
+							<li>Configuraciones del dispositivo o de la red que bloqueen notificaciones.</li>
+							<li>Uso en primer plano: Eva registra ubicación mientras la app está activa o en uso.</li>
+						</ul>
+						<p class="mt-4">
+							CROBF no se hace responsable por alertas que no se envíen, no se reciban o no se atiendan como consecuencia de estas limitaciones.
+						</p>
+					</section>
+
+					<section>
+						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
+							7. Cuenta, suspensión y terminación
+						</h2>
+						<p class="mt-4">
+							CROBF se reserva el derecho de suspender o eliminar cuentas que usen Eva de forma contraria a estos términos, que generen alertas falsas, abusivas o que pongan en riesgo a terceros.
+						</p>
+						<p class="mt-4">
+							La usuaria puede solicitar la eliminación de su cuenta escribiendo a{' '}
+							<a href={`mailto:${contactEmail}`} class="text-primary underline underline-offset-2 transition hover:opacity-80 focus:opacity-80 focus:outline-none">
+								{contactEmail}
+							</a>. Más detalles sobre plazos y datos conservados están en la{' '}
+							<a href="/privacidad" class="text-primary underline underline-offset-2 transition hover:opacity-80 focus:opacity-80 focus:outline-none">
+								Política de privacidad
+							</a>.
+						</p>
+					</section>
+
+					<section>
+						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
+							8. Modificaciones del servicio
+						</h2>
+						<p class="mt-4">
+							CROBF puede actualizar, modificar o suspender funcionalidades de Eva en cualquier momento. Haremos lo posible por avisar con antelación cuando un cambio afecte el uso habitual de la app.
+						</p>
+					</section>
+
+					<section>
+						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
+							9. Propiedad intelectual
+						</h2>
+						<p class="mt-4">
+							Todos los derechos sobre la marca, el código, el diseño y los contenidos de Eva pertenecen a CROBF. No está permitido copiar, modificar, distribuir ni realizar ingeniería inversa sobre la app sin autorización expresa.
+						</p>
+					</section>
+
+					<section>
+						<h2 class="font-display text-xl font-medium tracking-[-0.01em] text-foreground sm:text-2xl">
+							10. Ley aplicable y contacto
+						</h2>
+						<p class="mt-4">
+							Estos términos se rigen por las leyes de la República Argentina. Para cualquier consulta sobre estos términos, podés escribirnos a{' '}
+							<a href={`mailto:${contactEmail}`} class="text-primary underline underline-offset-2 transition hover:opacity-80 focus:opacity-80 focus:outline-none">
+								{contactEmail}
+							</a>.
+						</p>
+					</section>
+				</div>
+			</div>
+		</article>
+
+		{/* FOOTER */}
+		<footer class="border-t border-border/70 px-4 py-10 sm:px-6 lg:px-8">
+			<div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
+				<p>© {new Date().getFullYear()} Eva. Hecho con cuidado.</p>
+				<div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+					<a href="/" class="transition hover:text-foreground focus:text-foreground focus:outline-none">Inicio</a>
+					<a href="/privacidad" class="transition hover:text-foreground focus:text-foreground focus:outline-none">Privacidad</a>
+					<a href={`mailto:${contactEmail}`} class="transition hover:text-foreground focus:text-foreground focus:outline-none">Contacto</a>
+				</div>
+			</div>
+		</footer>
+	</main>
+</Layout>

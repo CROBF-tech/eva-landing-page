@@ -6,7 +6,11 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 import WaitlistForm from '../components/WaitlistForm.astro';
 ---
 
-<Layout>
+<Layout
+	title="Eva · Tu compañía antes de salir"
+	description="Eva es tu compañía antes de salir. Contale tu plan y, si no respondés a tiempo, Eva avisa a tus contactos seguros con tu ubicación y la información del recorrido."
+	ogTitle="Eva · Tu compañera antes de salir"
+>
 	<main class="min-h-screen bg-background text-foreground">
 		{/* ───────────── HEADER ───────────── */}
 		<header class="px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
@@ -323,9 +327,14 @@ import WaitlistForm from '../components/WaitlistForm.astro';
 				class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row"
 			>
 				<p>© {new Date().getFullYear()} Eva. Hecho con cuidado.</p>
-				<p class="text-muted-foreground/80">
-					Contale tu plan. Nosotros nos encargamos del resto.
-				</p>
+				<div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+					<a href="/terminos" class="transition hover:text-foreground focus:text-foreground focus:outline-none">
+						Términos
+					</a>
+					<a href="/privacidad" class="transition hover:text-foreground focus:text-foreground focus:outline-none">
+						Privacidad
+					</a>
+				</div>
 			</div>
 		</footer>
 	</main>
